@@ -1,0 +1,67 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie", "Hippie\Hippie.csproj", "{12ED0C29-A453-4EBB-B798-BFCD1F182469}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie.Tests", "Hippie.Tests\Hippie.Tests.csproj", "{665163FD-E06A-4E21-901D-D8F141B0B91F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie.Benchmarks", "Hippie.Benchmarks\Hippie.Benchmarks.csproj", "{07CCD06B-34D8-4F83-ADC4-03491DD8746D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F2CC6A3-09C9-4E34-9BAA-FBA0AC5B657B}"
+	ProjectSection(SolutionItems) = preProject
+		Hippie.sln.DotSettings = Hippie.sln.DotSettings
+		LICENSE.md = LICENSE.md
+		Logo.32.png = Logo.32.png
+		Logo.64.png = Logo.64.png
+		Logo.Original.png = Logo.Original.png
+		Logo.png = Logo.png
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie.Examples", "Hippie.Examples\Hippie.Examples.csproj", "{564892EF-1374-4939-84A1-CD1AC542AACC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release.Unchecked|Any CPU = Release.Unchecked|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Release.Unchecked|Any CPU.ActiveCfg = Release.Unchecked|Any CPU
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Release.Unchecked|Any CPU.Build.0 = Release.Unchecked|Any CPU
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12ED0C29-A453-4EBB-B798-BFCD1F182469}.Release|Any CPU.Build.0 = Release|Any CPU
+		{665163FD-E06A-4E21-901D-D8F141B0B91F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{665163FD-E06A-4E21-901D-D8F141B0B91F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{665163FD-E06A-4E21-901D-D8F141B0B91F}.Release.Unchecked|Any CPU.ActiveCfg = Release|Any CPU
+		{665163FD-E06A-4E21-901D-D8F141B0B91F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{665163FD-E06A-4E21-901D-D8F141B0B91F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Release.Unchecked|Any CPU.ActiveCfg = Release.Unchecked|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Release.Unchecked|Any CPU.Build.0 = Release.Unchecked|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Release.Unchecked|Any CPU.ActiveCfg = Release.Unchecked|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Release.Unchecked|Any CPU.Build.0 = Release.Unchecked|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564892EF-1374-4939-84A1-CD1AC542AACC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = Hippie.Examples\Hippie.Examples.csproj
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.FileWidth = 120
+		$1.TabsToSpaces = False
+		$1.inheritsSet = VisualStudio
+		$1.inheritsScope = text/plain
+		version = 0.9.1
+	EndGlobalSection
+EndGlobal
