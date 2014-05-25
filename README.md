@@ -1,5 +1,5 @@
 ![](http://pomma89.altervista.org/hippie/logo-mini.png "Hippie Logo") Hippie
-===========================================================================
+============================================================================
 
 Fully managed library providing five types of heap.
 
