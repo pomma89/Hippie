@@ -12,7 +12,7 @@ DISCLAIMER: This is an "unchecked" version of the Hippie library, that is, it is
 Fully managed library providing five types of heap. It implements d-ary, binary, binomial, Fibonacci and pairing heaps, in order to let the user choose the best heap to fit her needs. Each heap has its own advantages and disadvantages: please see the documentation or Wikipedia to better understand how those data structures work and how they behave in each operation.
     </description>
     <releaseNotes>
-* Library is fully portable.
+* Library is fully portable, but it also works on .NET 4.0, client profile.
     </releaseNotes>
     <summary>
 Fully managed library providing five types of heap.

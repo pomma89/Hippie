@@ -12,7 +12,7 @@ Fully managed library providing five types of heap. It implements d-ary, binary,
 NOTICE: If you need more performance, please have a look at the Hippie.Unchecked package. It is a release where all integrity checks have been stripped away.
     </description>
     <releaseNotes>
-* Library is fully portable.
+* Library is fully portable, but it also works on .NET 4.0, client profile.
     </releaseNotes>
     <summary>
 Fully managed library providing five types of heap.
