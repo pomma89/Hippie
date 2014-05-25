@@ -19,7 +19,7 @@ Fully managed library providing five types of heap.
     </summary>
     <language>en-US</language>
     <projectUrl>https://bitbucket.org/pomma89/hippie/overview</projectUrl>
-    <iconUrl>http://pomma89.altervista.it/hippie/logo-nuget.png</iconUrl>
+    <iconUrl>http://pomma89.altervista.it/hippie/logo.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
     <copyright>Copyright (c) 2012-2014 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>  
