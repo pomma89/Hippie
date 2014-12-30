@@ -8,8 +8,8 @@
     <ProjectGuid>{07CCD06B-34D8-4F83-ADC4-03491DD8746D}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hippie.Benchmarks</RootNamespace>
-    <AssemblyName>Hippie.Benchmarks</AssemblyName>
+    <RootNamespace>Benchmarks</RootNamespace>
+    <AssemblyName>Benchmarks</AssemblyName>
     <ReleaseVersion>0.9.1</ReleaseVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>
@@ -72,9 +72,9 @@
       <Project>{12ED0C29-A453-4EBB-B798-BFCD1F182469}</Project>
       <Name>Hippie</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hippie.Tests\Hippie.Tests.csproj">
+    <ProjectReference Include="..\Hippie.Tests\Unit Tests.csproj">
       <Project>{665163FD-E06A-4E21-901D-D8F141B0B91F}</Project>
-      <Name>Hippie.Tests</Name>
+      <Name>Unit Tests</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>

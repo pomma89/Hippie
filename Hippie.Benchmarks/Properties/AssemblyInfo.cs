@@ -32,11 +32,11 @@ using System.Security;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly: AssemblyTitle("Hippie.Benchmarks")]
+[assembly: AssemblyTitle("Benchmarks")]
 [assembly: AssemblyDescription("Benchmarks for Hippie class library.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Hippie.Benchmarks")]
+[assembly: AssemblyProduct("Benchmarks")]
 [assembly: AssemblyCopyright("Copyright (c) 2012 Alessio Parma <alessio.parma@gmail.com>")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
