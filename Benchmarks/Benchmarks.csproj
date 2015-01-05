@@ -72,7 +72,7 @@
       <Project>{12ED0C29-A453-4EBB-B798-BFCD1F182469}</Project>
       <Name>Hippie</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Hippie.Tests\Unit Tests.csproj">
+    <ProjectReference Include="..\Unit Tests\Unit Tests.csproj">
       <Project>{665163FD-E06A-4E21-901D-D8F141B0B91F}</Project>
       <Name>Unit Tests</Name>
     </ProjectReference>

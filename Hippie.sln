@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie", "Hippie\Hippie.csproj", "{12ED0C29-A453-4EBB-B798-BFCD1F182469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "Hippie.Tests\Unit Tests.csproj", "{665163FD-E06A-4E21-901D-D8F141B0B91F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unit Tests", "Unit Tests\Unit Tests.csproj", "{665163FD-E06A-4E21-901D-D8F141B0B91F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Hippie.Benchmarks\Benchmarks.csproj", "{07CCD06B-34D8-4F83-ADC4-03491DD8746D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Benchmarks", "Benchmarks\Benchmarks.csproj", "{07CCD06B-34D8-4F83-ADC4-03491DD8746D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F2CC6A3-09C9-4E34-9BAA-FBA0AC5B657B}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Hippie.Examples\Examples.csproj", "{564892EF-1374-4939-84A1-CD1AC542AACC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Examples", "Examples\Examples.csproj", "{564892EF-1374-4939-84A1-CD1AC542AACC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Logo", "Project Logo", "{F63E43AF-BB39-4965-BB53-12F42A40E6C1}"
 	ProjectSection(SolutionItems) = preProject
@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project Logo", "Project Log
 		Project Logo\logo-original.png = Project Logo\logo-original.png
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie.NET40", "Hippie.NET40\Hippie.NET40.csproj", "{0545E827-5F28-49AB-A75D-FC451FE94A4F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie (.NET40)", "Hippie (.NET40)\Hippie (.NET40).csproj", "{0545E827-5F28-49AB-A75D-FC451FE94A4F}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DD472B5D-C4C5-4312-9D21-71750B762E17}"
 	ProjectSection(SolutionItems) = preProject
