@@ -1,36 +1,36 @@
 <?xml version="1.0"?>
 
 <package>
-  <metadata>
-    <id>Hippie</id>
-    <version>2.0.1</version>
-    <title>Hippie</title>
-    <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
-    <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
-    <description>
+    <metadata>
+        <id>Hippie</id>
+        <version>2.0.1</version>
+        <title>DIBRIS.Hippie</title>
+        <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
+        <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
+        <description>
 Fully managed library providing five types of heap. It implements d-ary, binary, binomial, Fibonacci and pairing heaps, in order to let the user choose the best heap to fit her needs. Each heap has its own advantages and disadvantages: please see the documentation or Wikipedia to better understand how those data structures work and how they behave in each operation.
 NOTICE: If you need more performance, please have a look at the Hippie.Unchecked package. It is a release where all integrity checks have been stripped away.
-    </description>
-    <releaseNotes>
+        </description>
+        <releaseNotes>
 * Library is fully portable, but it also works on .NET 4.0, client profile.
-    </releaseNotes>
-    <summary>
+        </releaseNotes>
+        <summary>
 Fully managed library providing five types of heap.
-    </summary>
-    <language>en-US</language>
-    <projectUrl>https://bitbucket.org/pomma89/hippie/overview</projectUrl>
-    <iconUrl>http://pomma89.altervista.it/hippie/logo.png</iconUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-    <copyright>Copyright (c) 2012-2014 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>  
-    <dependencies>
-      <dependency id="Slinky.Unchecked" version="2.0.1" />
-    </dependencies>
-    <references></references>
-    <tags>heap binary binomial pairing fibonacci priority queue ternary quaternary stable</tags>
-  </metadata>
-  <files>
-    <file src="lib\" target="lib" />
-    <file src="LICENSE.txt" target="LICENSE.txt" />
-  </files>
+        </summary>
+        <language>en-US</language>
+        <projectUrl>https://bitbucket.org/pomma89/hippie/overview</projectUrl>
+        <iconUrl>http://pomma89.altervista.it/hippie/logo.png</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+        <copyright>Copyright (c) 2012-2014 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>
+        <dependencies>
+            <dependency id="PommaLabs.GRAMPA" version="2.1.2" />
+        </dependencies>
+        <references></references>
+        <tags>heap binary binomial pairing fibonacci priority queue ternary quaternary stable</tags>
+    </metadata>
+    <files>
+        <file src="lib\" target="lib" />
+        <file src="LICENSE.txt" target="LICENSE.txt" />
+    </files>
 </package>
