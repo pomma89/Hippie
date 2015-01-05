@@ -1,30 +1,25 @@
-// 
 // ArrayHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections;
@@ -32,36 +27,37 @@ namespace Hippie
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using Core;
+    using PommaLabs;
 
     public sealed class ArrayHeap<TVal, TPr> : RawHeap<TVal, TPr, ArrayHeap<TVal, TPr>.ArrayHandle>, IRawHeap<TVal, TPr>
     {
         /// <summary>
         ///   The index from which handles are stored.
         /// </summary>
-        const int MinIndex = 0;
+        private const int MinIndex = 0;
 
         /// <summary>
         ///   The minimum size of the array containing the handles.
         /// </summary>
-        const int MinSize = 4;
+        private const int MinSize = 4;
 
         /// <summary>
-        ///   The factor used to increment the size of the array
-        ///   containing the handles.
+        ///   The factor used to increment the size of the array containing the handles.
         /// </summary>
-        const int ResizeFactor = 2;
+        private const int ResizeFactor = 2;
 
         /// <summary>
         ///   The maximum number of children each node can have.
         /// </summary>
-        readonly byte _cc;
+        private readonly byte _cc;
 
         /// <summary>
         ///   The array into which handles are stored.
         /// </summary>
-        ArrayHandle[] _handles;
+        private ArrayHandle[] _handles;
 
-        internal ArrayHeap(Byte cc, IComparer<TPr> cmp) : base(cmp)
+        internal ArrayHeap(Byte cc, IComparer<TPr> cmp)
+            : base(cmp)
         {
             Contract.Requires<ArgumentOutOfRangeException>(cc >= 2, ErrorMessages.WrongChildCount);
             _cc = cc;
@@ -103,13 +99,12 @@ namespace Hippie
 
         public IEnumerator<IHeapHandle<TVal, TPr>> GetEnumerator()
         {
-// ReSharper disable LoopCanBeConvertedToQuery
-// ReSharper disable ForCanBeConvertedToForeach
-            for (var i = MinIndex; i < Count; ++i) {
+            // ReSharper disable LoopCanBeConvertedToQuery ReSharper disable ForCanBeConvertedToForeach
+            for (var i = MinIndex; i < Count; ++i)
+            {
                 yield return _handles[i];
             }
-// ReSharper restore ForCanBeConvertedToForeach
-// ReSharper restore LoopCanBeConvertedToQuery
+            // ReSharper restore ForCanBeConvertedToForeach ReSharper restore LoopCanBeConvertedToQuery
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -117,30 +112,38 @@ namespace Hippie
             return GetEnumerator();
         }
 
-        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap) where TVal2 : TVal where TPr2 : TPr
+        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap)
+            where TVal2 : TVal
+            where TPr2 : TPr
         {
-            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0) {
+            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0)
+            {
                 return;
             }
             var other = otherHeap as ArrayHeap<TVal, TPr>;
-            if (other != null) {
+            if (other != null)
+            {
                 var otherHandles = other._handles;
-                for (var i = MinIndex; i < other.Count; ++i) {
+                for (var i = MinIndex; i < other.Count; ++i)
+                {
                     Add(otherHandles[i]);
                 }
                 other.Clear();
                 return;
             }
             var other2 = otherHeap as ArrayHeap<TVal2, TPr2>;
-            if (other2 != null) {
+            if (other2 != null)
+            {
                 var other2Handles = other2._handles;
-                for (var i = MinIndex; i < other2.Count; ++i) {
+                for (var i = MinIndex; i < other2.Count; ++i)
+                {
                     Add(ArrayHandle.New(other2Handles[i]));
                 }
                 other2.Clear();
                 return;
             }
-            while (otherHeap.Count != 0) {
+            while (otherHeap.Count != 0)
+            {
                 Add(ArrayHandle.New(otherHeap.RemoveMin()));
             }
         }
@@ -148,7 +151,8 @@ namespace Hippie
         public bool Remove(IHeapHandle<TVal, TPr> handle)
         {
             var arrayHandle = GetHandle(handle as ArrayHandle);
-            if (arrayHandle != null) {
+            if (arrayHandle != null)
+            {
                 RemoveAt(arrayHandle.Index);
                 return true;
             }
@@ -164,22 +168,26 @@ namespace Hippie
 
         public IEnumerable<IReadOnlyTree<TVal, TPr>> ToReadOnlyForest()
         {
-            if (Count == 0) {
+            if (Count == 0)
+            {
                 yield break;
             }
-            var queue = new Queue<Pair<ArrayHandle, ReadOnlyTree<TVal, TPr>>>();
-            queue.Enqueue(Pair.Create(_handles[MinIndex], (ReadOnlyTree<TVal, TPr>) null));
+            var queue = new Queue<GPair<ArrayHandle, ReadOnlyTree<TVal, TPr>>>();
+            queue.Enqueue(GPair.Create(_handles[MinIndex], (ReadOnlyTree<TVal, TPr>) null));
             ReadOnlyTree<TVal, TPr> root = null;
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var vi = queue.Dequeue();
                 var it = vi.First;
                 var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Second);
-                if (it.Index == MinIndex) {
+                if (it.Index == MinIndex)
+                {
                     root = t;
                 }
-                var start = _cc*it.Index + 1;
-                for (var i = 0; i < _cc && i + start < Count; ++i) {
-                    queue.Enqueue(Pair.Create(_handles[start + i], t));
+                var start = _cc * it.Index + 1;
+                for (var i = 0; i < _cc && i + start < Count; ++i)
+                {
+                    queue.Enqueue(GPair.Create(_handles[start + i], t));
                 }
             }
             yield return root;
@@ -192,11 +200,13 @@ namespace Hippie
 
         protected override ArrayHandle GetHandle(ArrayHandle handle)
         {
-            if (handle == null) {
+            if (handle == null)
+            {
                 return null;
             }
             var i = handle.Index;
-            if (i >= Count || !ReferenceEquals(handle, _handles[i])) {
+            if (i >= Count || !ReferenceEquals(handle, _handles[i]))
+            {
                 return null;
             }
             return handle;
@@ -206,14 +216,18 @@ namespace Hippie
         {
             var i = handle.Index;
 
-            for (int j = _cc*i + 1, k = j + _cc; j < Count; j = _cc*i + 1, k = j + _cc) {
+            for (int j = _cc * i + 1, k = j + _cc; j < Count; j = _cc * i + 1, k = j + _cc)
+            {
                 var mc = j; // Min child index
-                for (++j; j < Count && j < k; ++j) {
-                    if (Cmp(_handles[j].Priority, _handles[mc].Priority) < 0) {
+                for (++j; j < Count && j < k; ++j)
+                {
+                    if (Cmp(_handles[j].Priority, _handles[mc].Priority) < 0)
+                    {
                         mc = j;
                     }
                 }
-                if (Cmp(handle.Priority, _handles[mc].Priority) <= 0) {
+                if (Cmp(handle.Priority, _handles[mc].Priority) <= 0)
+                {
                     break;
                 }
                 PlaceAt(_handles[mc], i);
@@ -225,13 +239,16 @@ namespace Hippie
         protected override void MoveUp(ArrayHandle handle)
         {
             var i = handle.Index;
-            while (true) {
-                if (i == MinIndex) {
+            while (true)
+            {
+                if (i == MinIndex)
+                {
                     break;
                 }
-                var j = (i - 1)/_cc;
+                var j = (i - 1) / _cc;
                 var parent = _handles[j];
-                if (Cmp(handle.Priority, parent.Priority) >= 0) {
+                if (Cmp(handle.Priority, parent.Priority) >= 0)
+                {
                     break;
                 }
                 PlaceAt(parent, i);
@@ -240,10 +257,11 @@ namespace Hippie
             PlaceAt(handle, i);
         }
 
-        void Add(ArrayHandle handle)
+        private void Add(ArrayHandle handle)
         {
-            if (Count == _handles.Length) {
-                Array.Resize(ref _handles, Count*ResizeFactor);
+            if (Count == _handles.Length)
+            {
+                Array.Resize(ref _handles, Count * ResizeFactor);
             }
             PlaceAt(handle, Count++);
             MoveUp(handle);
@@ -251,9 +269,10 @@ namespace Hippie
         }
 
         [Conditional("DEBUG")]
-        void CheckHandlesSize()
+        private void CheckHandlesSize()
         {
-            if (Count <= MinSize) {
+            if (Count <= MinSize)
+            {
                 Debug.Assert(_handles.Length == MinSize);
                 return;
             }
@@ -262,26 +281,27 @@ namespace Hippie
             Debug.Assert(expectedLog.Equals(foundLog));
         }
 
-        void PlaceAt(ArrayHandle handle, int index)
+        private void PlaceAt(ArrayHandle handle, int index)
         {
             Debug.Assert(index <= Count);
             handle.Index = index;
             _handles[index] = handle;
         }
 
-        void RemoveAt(int index)
+        private void RemoveAt(int index)
         {
             var last = _handles[--Count];
-            // If we have an empty heap, or we are deleting the last element,
-            // we should not swap any element. In the first case, because there is
-            // nothing to swap; in the second case, because it is useless and
-            // the capacity of the array might have gotten too little.
-            if (Count != 0 && Count != index) {
+            // If we have an empty heap, or we are deleting the last element, we should not swap any
+            // element. In the first case, because there is nothing to swap; in the second case,
+            // because it is useless and the capacity of the array might have gotten too little.
+            if (Count != 0 && Count != index)
+            {
                 last.Index = index;
                 _handles[index] = last;
                 MoveDown(last);
             }
-            if (Count >= MinSize && Count*ResizeFactor == _handles.Length) {
+            if (Count >= MinSize && Count * ResizeFactor == _handles.Length)
+            {
                 Array.Resize(ref _handles, Count);
             }
             CheckHandlesSize();
@@ -298,9 +318,11 @@ namespace Hippie
             }
 
             public TVal Value { get; set; }
+
             public TPr Priority { get; set; }
 
-            public static ArrayHandle New<TVal2, TPr2>(IHeapHandle<TVal2, TPr2> handle) where TVal2 : TVal
+            public static ArrayHandle New<TVal2, TPr2>(IHeapHandle<TVal2, TPr2> handle)
+                where TVal2 : TVal
                 where TPr2 : TPr
             {
                 return new ArrayHandle(handle.Value, handle.Priority);

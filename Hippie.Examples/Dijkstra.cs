@@ -27,6 +27,7 @@
 namespace Hippie.Examples
 {
     using System.Collections.Generic;
+    using DIBRIS.Hippie;
 
     static class Dijkstra
     {

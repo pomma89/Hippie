@@ -8,15 +8,16 @@
     <ProjectGuid>{12ED0C29-A453-4EBB-B798-BFCD1F182469}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Hippie</RootNamespace>
-    <AssemblyName>Hippie</AssemblyName>
+    <RootNamespace>DIBRIS.Hippie</RootNamespace>
+    <AssemblyName>DIBRIS.Hippie</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ReleaseVersion>0.9.1</ReleaseVersion>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Profile158</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
@@ -83,7 +84,7 @@
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
     <DefineConstants>USETHROWER</DefineConstants>
-    <DocumentationFile>bin\Release\Hippie.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\DIBRIS.Hippie.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
@@ -137,7 +138,7 @@
     <ErrorReport>prompt</ErrorReport>
     <CodeAnalysisRuleSet>Hippie.ruleset</CodeAnalysisRuleSet>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release.Unchecked\Hippie.xml</DocumentationFile>
+    <DocumentationFile>bin\Release.Unchecked\DIBRIS.Hippie.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
     <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
@@ -175,8 +176,14 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PommaLabs.ConcurrentWorkQueue">
       <HintPath>..\packages\PommaLabs.ConcurrentWorkQueue.0.9.1\lib\portable-win8+net40+sl5+wp8\PommaLabs.ConcurrentWorkQueue.dll</HintPath>
+    </Reference>
+    <Reference Include="PommaLabs.GRAMPA">
+      <HintPath>..\packages\PommaLabs.GRAMPA.2.1.2\lib\portable-net45+win8+wp8+wpa81\PommaLabs.GRAMPA.dll</HintPath>
     </Reference>
     <Reference Include="Slinky.Unchecked">
       <HintPath>..\packages\Slinky.Unchecked.2.1.0\lib\portable-win8+net45+sl5+wp8\Slinky.Unchecked.dll</HintPath>
@@ -189,7 +196,6 @@
     <Compile Include="Contracts\ThinHeapContract.cs" />
     <Compile Include="Contracts\UniqueHeapContract.cs" />
     <Compile Include="Core\ExtensionMethods.cs" />
-    <Compile Include="Core\Pair.cs" />
     <Compile Include="StableHeap.cs" />
     <Compile Include="ThinHeap.cs" />
     <Compile Include="IStableHeap.cs" />
@@ -197,7 +203,7 @@
     <Compile Include="StableHeapFactory.cs" />
     <Compile Include="ArrayHeap.cs" />
     <Compile Include="BinomialHeap.cs" />
-    <Compile Include="ErrorMessages.cs" />
+    <Compile Include="Core\ErrorMessages.cs" />
     <Compile Include="FibonacciHeap.cs" />
     <Compile Include="Core\ReadOnlyTree.cs" />
     <Compile Include="UniqueHeap.cs" />
@@ -250,4 +256,11 @@ if $(ConfigurationName) == Release (
     copy "%25ASR_IN%25.xml" "$(SolutionDir)Hippie.Packager/lib/portable-win8+net45+sl5+wp8"
 )</PostBuildEvent>
   </PropertyGroup>
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
 </Project>

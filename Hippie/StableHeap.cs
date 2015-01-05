@@ -1,30 +1,25 @@
-﻿// 
-// StableHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// StableHeap.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections;
@@ -35,8 +30,8 @@ namespace Hippie
 
     public sealed class StableHeap<TVal, TPr> : IStableRawHeap<TVal, TPr>
     {
-        readonly IComparer<TPr> _comparer;
-        readonly IRawHeap<TVal, IVersionedPriority<TPr>> _wrappedHeap;
+        private readonly IComparer<TPr> _comparer;
+        private readonly IRawHeap<TVal, IVersionedPriority<TPr>> _wrappedHeap;
 
         internal StableHeap(IRawHeap<TVal, IVersionedPriority<TPr>> wrappedHeap, IComparer<TPr> comparer,
                             long initialVersion)
@@ -123,7 +118,9 @@ namespace Hippie
             return GetEnumerator();
         }
 
-        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other) where TVal2 : TVal where TPr2 : TPr
+        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other)
+            where TVal2 : TVal
+            where TPr2 : TPr
         {
             this.CommonMerge(other);
         }
@@ -167,7 +164,7 @@ namespace Hippie
             return _wrappedHeap.ToString();
         }
 
-        static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, IVersionedPriority<TPr>> tree,
+        private static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, IVersionedPriority<TPr>> tree,
                                                      ReadOnlyTree<TVal, TPr> parent)
         {
             return new ReadOnlyTree<TVal, TPr>(tree.Value, tree.Priority.Value, parent);
@@ -203,11 +200,12 @@ namespace Hippie
 
         IEnumerator<IHeapHandle<TVal, TPr>> IEnumerable<IHeapHandle<TVal, TPr>>.GetEnumerator()
         {
-// ReSharper disable LoopCanBeConvertedToQuery
-            foreach (var handle in _wrappedHeap) {
+            // ReSharper disable LoopCanBeConvertedToQuery
+            foreach (var handle in _wrappedHeap)
+            {
                 yield return new StableHandle<TVal, TPr>(handle);
             }
-// ReSharper restore LoopCanBeConvertedToQuery
+            // ReSharper restore LoopCanBeConvertedToQuery
         }
 
         public Boolean Remove(IHeapHandle<TVal, TPr> handle)
@@ -231,13 +229,13 @@ namespace Hippie
             return _wrappedHeap.UpdateValue(UnwrapHandle(handle), newValue);
         }
 
-        static IHeapHandle<TVal, IVersionedPriority<TPr>> UnwrapHandle(IHeapHandle<TVal, TPr> wrapper)
+        private static IHeapHandle<TVal, IVersionedPriority<TPr>> UnwrapHandle(IHeapHandle<TVal, TPr> wrapper)
         {
             Contract.Requires<ArgumentException>(wrapper is StableHandle<TVal, TPr>);
             Debug.Assert(wrapper is StableHandle<TVal, TPr>, "To keep R# quiet :)");
             return (wrapper as StableHandle<TVal, TPr>).Handle;
         }
 
-        #endregion
+        #endregion IRawHeap Members
     }
 }

@@ -7,11 +7,13 @@
     <ProjectGuid>{0545E827-5F28-49AB-A75D-FC451FE94A4F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>PommaLabs.Hippie</RootNamespace>
-    <AssemblyName>PommaLabs.Hippie</AssemblyName>
+    <RootNamespace>DIBRIS.Hippie</RootNamespace>
+    <AssemblyName>DIBRIS.Hippie</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -117,6 +119,12 @@
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PommaLabs.GRAMPA">
+      <HintPath>..\packages\PommaLabs.GRAMPA.2.1.2\lib\net40-client\PommaLabs.GRAMPA.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -147,11 +155,11 @@
     <Compile Include="..\Hippie\Contracts\UniqueHeapContract.cs">
       <Link>Contracts\UniqueHeapContract.cs</Link>
     </Compile>
+    <Compile Include="..\Hippie\Core\ErrorMessages.cs">
+      <Link>Core\ErrorMessages.cs</Link>
+    </Compile>
     <Compile Include="..\Hippie\Core\ExtensionMethods.cs">
       <Link>Core\ExtensionMethods.cs</Link>
-    </Compile>
-    <Compile Include="..\Hippie\Core\Pair.cs">
-      <Link>Core\Pair.cs</Link>
     </Compile>
     <Compile Include="..\Hippie\Core\RawHeap.cs">
       <Link>Core\RawHeap.cs</Link>
@@ -161,9 +169,6 @@
     </Compile>
     <Compile Include="..\Hippie\Core\TreeHeap.cs">
       <Link>Core\TreeHeap.cs</Link>
-    </Compile>
-    <Compile Include="..\Hippie\ErrorMessages.cs">
-      <Link>ErrorMessages.cs</Link>
     </Compile>
     <Compile Include="..\Hippie\FibonacciHeap.cs">
       <Link>FibonacciHeap.cs</Link>
@@ -203,7 +208,17 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

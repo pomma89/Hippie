@@ -27,6 +27,7 @@
 namespace Hippie.Examples
 {
     using System;
+    using DIBRIS.Hippie;
 
     static class StableHeap
     {

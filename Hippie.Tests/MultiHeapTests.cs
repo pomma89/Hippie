@@ -1,48 +1,46 @@
-﻿// 
-// MultiHeapTests.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// MultiHeapTests.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie.Tests
+namespace UnitTests
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using DIBRIS.Hippie;
     using NUnit.Framework;
 
     public abstract class MultiHeapTests : HeapTestsBase
     {
         protected const int ManyIntItemsCount = 6120;
-        const int FewIntItemsCount = ManyIntItemsCount/100;
-        const int RandomTestsRepetitionCount = 5;
-        
-        readonly IHeap<int> _refIntHeap = HeapFactory.NewBinaryHeap<int>();
-        IHeap<int> _intHeap;
+        private const int FewIntItemsCount = ManyIntItemsCount / 100;
+        private const int RandomTestsRepetitionCount = 5;
+
+        private readonly IHeap<int> _refIntHeap = HeapFactory.NewBinaryHeap<int>();
+        private IHeap<int> _intHeap;
 
         protected abstract IHeap<T> GetHeap<T>() where T : IComparable<T>;
+
         protected abstract IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp) where T : IComparable<T>;
+
         protected abstract IHeap<T> GetHeap<T>(IComparer<T> cmp);
 
         [SetUp]
@@ -112,7 +110,7 @@ namespace Hippie.Tests
             Add_MainTest(AddSameIntItems);
         }
 
-        void Add_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Add_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             AssertSameContents(_refIntHeap, _intHeap);
@@ -172,7 +170,7 @@ namespace Hippie.Tests
             Clear_MainTest(AddSameIntItems);
         }
 
-        void Clear_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Clear_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             _intHeap.Clear();
@@ -235,7 +233,7 @@ namespace Hippie.Tests
             Contains_MainTest(AddSameIntItems);
         }
 
-        void Contains_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Contains_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             foreach (var item in _refIntHeap)
@@ -310,7 +308,7 @@ namespace Hippie.Tests
             Assert.False(_intHeap.Remove(0));
         }
 
-        void Remove_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Remove_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             foreach (var item in _refIntHeap)
@@ -412,21 +410,21 @@ namespace Hippie.Tests
 
         [Test]
         public void Merge_EmptyHeap_WithFullHeap()
-        {            
+        {
             var otherIntHeap = HeapFactory.NewArrayHeap<int>(3);
             AddRandomIntItems(ManyIntItemsCount, otherIntHeap);
             _intHeap.Merge(otherIntHeap);
             AssertSameContents(_refIntHeap, _intHeap);
         }
 
-        void Merge_DifferentHeapType_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Merge_DifferentHeapType_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             var otherIntHeap = HeapFactory.NewArrayHeap<int>(30);
             addMethod(count, otherIntHeap);
             _intHeap.Merge(otherIntHeap);
             Assert.AreEqual(0, otherIntHeap.Count);
-            
+
             addMethod(count, null);
             addMethod(count, otherIntHeap);
             _intHeap.Merge(otherIntHeap);
@@ -434,14 +432,14 @@ namespace Hippie.Tests
             AssertSameContents(_refIntHeap, _intHeap);
         }
 
-        void Merge_SameHeapType_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void Merge_SameHeapType_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             var otherIntHeap = GetHeap<int>();
             addMethod(count, otherIntHeap);
             _intHeap.Merge(otherIntHeap);
             Assert.AreEqual(0, otherIntHeap.Count);
-            
+
             addMethod(count, null);
             addMethod(count, otherIntHeap);
             _intHeap.Merge(otherIntHeap);
@@ -454,17 +452,17 @@ namespace Hippie.Tests
         public void Merge_WithFullHeap_WithDifferentComparer()
         {
             AddRandomIntItems(ManyIntItemsCount, _intHeap);
-		    var heap = HeapFactory.NewArrayHeap(21, new ReversedIntComparer());
+            var heap = HeapFactory.NewArrayHeap(21, new ReversedIntComparer());
             AddRandomIntItems(ManyIntItemsCount, heap);
-			_intHeap.Merge(heap);
+            _intHeap.Merge(heap);
         }
 
         [Test]
         public void Merge_WithFullHeap_WithSameValues()
         {
             AddRandomIntItems(ManyIntItemsCount, _intHeap); // Method also adds values to RefIntHeap
-			_intHeap.Merge(_refIntHeap);
-            Assert.AreEqual(2*ManyIntItemsCount, _intHeap.Count);
+            _intHeap.Merge(_refIntHeap);
+            Assert.AreEqual(2 * ManyIntItemsCount, _intHeap.Count);
         }
 
         /**********************************************************************
@@ -521,7 +519,7 @@ namespace Hippie.Tests
             HeapSort_MainTest(AddSameIntItems);
         }
 
-        void HeapSort_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void HeapSort_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             var list = _refIntHeap.ToList();
@@ -587,7 +585,7 @@ namespace Hippie.Tests
             ToReadOnlyForest_Generic_MainTest(AddSameIntItems);
         }
 
-        void ToReadOnlyForest_Generic_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
+        private void ToReadOnlyForest_Generic_MainTest(Action<int, IHeap<int>> addMethod, int count = ManyIntItemsCount)
         {
             addMethod(count, null);
             var items = new HashSet<int>(_intHeap);
@@ -595,41 +593,47 @@ namespace Hippie.Tests
             // Breadth-first, no action
             var trees = forest.SelectMany(t => t.BreadthFirstVisit()).ToList();
             Assert.AreEqual(count, trees.Count);
-            foreach (var t in trees) {
+            foreach (var t in trees)
+            {
                 Assert.True(items.Contains(t.Item));
             }
             // Depth-first, no action
             trees = forest.SelectMany(t => t.DepthFirstVisit()).ToList();
             Assert.AreEqual(count, trees.Count);
-            foreach (var t in trees) {
+            foreach (var t in trees)
+            {
                 Assert.True(items.Contains(t.Item));
             }
             // Breadth-first, with selector
             var res = forest.SelectMany(t => t.BreadthFirstVisit((n, a) => n.Item, 0)).ToList();
             Assert.AreEqual(count, res.Count);
-            foreach (var r in res) {
+            foreach (var r in res)
+            {
                 Assert.True(items.Contains(r));
             }
             // Depth-first, with selector
             res = forest.SelectMany(t => t.DepthFirstVisit((n, a) => n.Item, 0)).ToList();
             Assert.AreEqual(count, res.Count);
-            foreach (var r in res) {
+            foreach (var r in res)
+            {
                 Assert.True(items.Contains(r));
             }
             // Breadth-first, with action
             var set = new HashSet<int>();
-// ReSharper disable AccessToModifiedClosure
+            // ReSharper disable AccessToModifiedClosure
             forest.ForEach(t => t.BreadthFirstVisit(n => set.Add(n.Item)));
-// ReSharper restore AccessToModifiedClosure
+            // ReSharper restore AccessToModifiedClosure
             Assert.AreEqual(items.Count, set.Count);
-            foreach (var s in set) {
+            foreach (var s in set)
+            {
                 Assert.True(items.Contains(s));
             }
             // Depth-first, with action
             set = new HashSet<int>();
             forest.ForEach(t => t.DepthFirstVisit(n => set.Add(n.Item)));
             Assert.AreEqual(items.Count, set.Count);
-            foreach (var s in set) {
+            foreach (var s in set)
+            {
                 Assert.True(items.Contains(s));
             }
         }
@@ -697,7 +701,7 @@ namespace Hippie.Tests
 		 * Private methods
 		 **********************************************************************/
 
-        static void AssertSameContents<T>(IHeap<T> refHeap, IHeap<T> heap)
+        private static void AssertSameContents<T>(IHeap<T> refHeap, IHeap<T> heap)
             where T : IComparable<T>
         {
             Assert.AreEqual(refHeap.Count, heap.Count);
@@ -708,7 +712,8 @@ namespace Hippie.Tests
             foreach (var p in heap)
                 Assert.True(refHeap.Contains(p));
 
-            while (refHeap.Count != 0) {
+            while (refHeap.Count != 0)
+            {
                 Assert.AreEqual(refHeap.Min, heap.Min);
                 Assert.AreEqual(refHeap.RemoveMin(), heap.RemoveMin());
                 Assert.AreEqual(refHeap.Count, heap.Count);
@@ -717,11 +722,12 @@ namespace Hippie.Tests
             Assert.AreEqual(0, heap.Count);
         }
 
-        void AddOrderedIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
+        private void AddOrderedIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
         {
             Debug.Assert(count <= ManyIntItemsCount);
             heap = heap ?? _intHeap;
-            for (var i = 0; i < count/2; ++i) {
+            for (var i = 0; i < count / 2; ++i)
+            {
                 // Values are added twice, because we want duplicates
                 _refIntHeap.Add(i);
                 _refIntHeap.Add(i);
@@ -730,11 +736,12 @@ namespace Hippie.Tests
             }
         }
 
-        void AddReverseOrderedIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
+        private void AddReverseOrderedIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
         {
             Debug.Assert(count <= ManyIntItemsCount);
             heap = heap ?? _intHeap;
-            for (var i = count/2; i > 0; --i) {
+            for (var i = count / 2; i > 0; --i)
+            {
                 // Values are added twice, because we want duplicates
                 _refIntHeap.Add(i);
                 _refIntHeap.Add(i);
@@ -743,22 +750,24 @@ namespace Hippie.Tests
             }
         }
 
-        void AddRandomIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
+        private void AddRandomIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
         {
             Debug.Assert(count <= ManyIntItemsCount);
             heap = heap ?? _intHeap;
-            for (var i = 0; i < count; ++i) {
+            for (var i = 0; i < count; ++i)
+            {
                 var r = Rand.Next(0, 50); // We want duplicates, if possible
                 _refIntHeap.Add(r);
                 heap.Add(r);
             }
         }
 
-        void AddSameIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
+        private void AddSameIntItems(int count = ManyIntItemsCount, IHeap<int> heap = null)
         {
             Debug.Assert(count <= ManyIntItemsCount);
             heap = heap ?? _intHeap;
-            for (var i = 0; i < count; ++i) {
+            for (var i = 0; i < count; ++i)
+            {
                 _refIntHeap.Add(0);
                 heap.Add(0);
             }
@@ -789,12 +798,12 @@ namespace Hippie.Tests
         {
             return HeapFactory.NewBinaryHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return HeapFactory.NewBinaryHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return HeapFactory.NewBinaryHeap(cmp);
@@ -807,12 +816,12 @@ namespace Hippie.Tests
         {
             return HeapFactory.NewBinomialHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return HeapFactory.NewBinomialHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return HeapFactory.NewBinomialHeap(cmp);
@@ -825,12 +834,12 @@ namespace Hippie.Tests
         {
             return HeapFactory.NewFibonacciHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return HeapFactory.NewFibonacciHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return HeapFactory.NewFibonacciHeap(cmp);
@@ -843,12 +852,12 @@ namespace Hippie.Tests
         {
             return HeapFactory.NewPairingHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return HeapFactory.NewPairingHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return HeapFactory.NewPairingHeap(cmp);
@@ -858,15 +867,17 @@ namespace Hippie.Tests
     public abstract class StableMultiHeapTests : MultiHeapTests
     {
         [TestCase(1)]
-        [TestCase(ManyIntItemsCount/2)]
+        [TestCase(ManyIntItemsCount / 2)]
         [TestCase(ManyIntItemsCount)]
         public void Add_SamePriority(int valueCount)
         {
             var heap = GetHeap<TheStrangeDuo>();
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 heap.Add(new TheStrangeDuo(i, 0));
             }
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 Assert.AreEqual(i, heap.Min.Aa);
                 Assert.AreEqual(0, heap.Min.Bb);
                 var min = heap.RemoveMin();
@@ -875,7 +886,7 @@ namespace Hippie.Tests
             }
         }
 
-        struct TheStrangeDuo : IComparable<TheStrangeDuo>
+        private struct TheStrangeDuo : IComparable<TheStrangeDuo>
         {
             public readonly int Aa;
             public readonly int Bb;
@@ -917,12 +928,12 @@ namespace Hippie.Tests
         {
             return StableHeapFactory.NewBinaryHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return StableHeapFactory.NewBinaryHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return StableHeapFactory.NewBinaryHeap(cmp);
@@ -935,12 +946,12 @@ namespace Hippie.Tests
         {
             return StableHeapFactory.NewBinomialHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return StableHeapFactory.NewBinomialHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return StableHeapFactory.NewBinomialHeap(cmp);
@@ -953,12 +964,12 @@ namespace Hippie.Tests
         {
             return StableHeapFactory.NewFibonacciHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return StableHeapFactory.NewFibonacciHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return StableHeapFactory.NewFibonacciHeap(cmp);
@@ -971,12 +982,12 @@ namespace Hippie.Tests
         {
             return StableHeapFactory.NewPairingHeap<T>();
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IEqualityComparer<T> eqCmp)
         {
             return StableHeapFactory.NewPairingHeap(eqCmp);
         }
-        
+
         protected override IHeap<T> GetHeap<T>(IComparer<T> cmp)
         {
             return StableHeapFactory.NewPairingHeap(cmp);

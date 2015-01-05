@@ -1,48 +1,46 @@
-﻿// 
-// ReadOnlyTree.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// ReadOnlyTree.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie.Core
+namespace DIBRIS.Hippie.Core
 {
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using DIBRIS.Hippie;
+    using PommaLabs;
 
-    sealed class ReadOnlyTree<TVal, TPr> : IReadOnlyTree<TVal, TPr>
+    internal sealed class ReadOnlyTree<TVal, TPr> : IReadOnlyTree<TVal, TPr>
     {
-        readonly List<ReadOnlyTree<TVal, TPr>> _children = new List<ReadOnlyTree<TVal, TPr>>();
-        readonly ReadOnlyTree<TVal, TPr> _parent;
-        readonly TPr _priority;
-        readonly TVal _value;
+        private readonly List<ReadOnlyTree<TVal, TPr>> _children = new List<ReadOnlyTree<TVal, TPr>>();
+        private readonly ReadOnlyTree<TVal, TPr> _parent;
+        private readonly TPr _priority;
+        private readonly TVal _value;
 
         public ReadOnlyTree(TVal value, TPr priority, ReadOnlyTree<TVal, TPr> parent)
         {
             _value = value;
             _priority = priority;
             _parent = parent;
-            if (parent != null) {
+            if (parent != null)
+            {
                 parent._children.Add(this);
             }
         }
@@ -71,10 +69,12 @@ namespace Hippie.Core
         {
             var queue = new Queue<ReadOnlyTree<TVal, TPr>>();
             queue.Enqueue(this);
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var t = queue.Dequeue();
                 yield return t;
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     queue.Enqueue(c);
                 }
             }
@@ -84,10 +84,12 @@ namespace Hippie.Core
         {
             var queue = new Queue<ReadOnlyTree<TVal, TPr>>();
             queue.Enqueue(this);
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var t = queue.Dequeue();
                 visitor(t);
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     queue.Enqueue(c);
                 }
             }
@@ -95,14 +97,16 @@ namespace Hippie.Core
 
         public IEnumerable<TRet> BreadthFirstVisit<TRet>(Func<IReadOnlyTree<TVal, TPr>, TRet, TRet> visitor, TRet start)
         {
-            var queue = new Queue<Pair<ReadOnlyTree<TVal, TPr>, TRet>>();
-            queue.Enqueue(Pair.Create(this, start));
-            while (queue.Count > 0) {
+            var queue = new Queue<GPair<ReadOnlyTree<TVal, TPr>, TRet>>();
+            queue.Enqueue(GPair.Create(this, start));
+            while (queue.Count > 0)
+            {
                 var tuple = queue.Dequeue();
                 var res = visitor(tuple.First, tuple.Second);
                 yield return res;
-                foreach (var c in tuple.First._children) {
-                    queue.Enqueue(Pair.Create(c, res));
+                foreach (var c in tuple.First._children)
+                {
+                    queue.Enqueue(GPair.Create(c, res));
                 }
             }
         }
@@ -111,10 +115,12 @@ namespace Hippie.Core
         {
             var stack = new Stack<ReadOnlyTree<TVal, TPr>>();
             stack.Push(this);
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var t = stack.Pop();
                 yield return t;
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     stack.Push(c);
                 }
             }
@@ -124,10 +130,12 @@ namespace Hippie.Core
         {
             var stack = new Stack<ReadOnlyTree<TVal, TPr>>();
             stack.Push(this);
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var t = stack.Pop();
                 visitor(t);
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     stack.Push(c);
                 }
             }
@@ -135,14 +143,16 @@ namespace Hippie.Core
 
         public IEnumerable<TRet> DepthFirstVisit<TRet>(Func<IReadOnlyTree<TVal, TPr>, TRet, TRet> visitor, TRet start)
         {
-            var stack = new Stack<Pair<ReadOnlyTree<TVal, TPr>, TRet>>();
-            stack.Push(Pair.Create(this, start));
-            while (stack.Count > 0) {
+            var stack = new Stack<GPair<ReadOnlyTree<TVal, TPr>, TRet>>();
+            stack.Push(GPair.Create(this, start));
+            while (stack.Count > 0)
+            {
                 var tuple = stack.Pop();
                 var res = visitor(tuple.First, tuple.Second);
                 yield return res;
-                foreach (var c in tuple.First._children) {
-                    stack.Push(Pair.Create(c, res));
+                foreach (var c in tuple.First._children)
+                {
+                    stack.Push(GPair.Create(c, res));
                 }
             }
         }
@@ -153,17 +163,18 @@ namespace Hippie.Core
         }
     }
 
-    sealed class ReadOnlyTree<T> : IReadOnlyTree<T>
+    internal sealed class ReadOnlyTree<T> : IReadOnlyTree<T>
     {
-        readonly List<ReadOnlyTree<T>> _children = new List<ReadOnlyTree<T>>();
-        readonly T _item;
-        readonly ReadOnlyTree<T> _parent;
+        private readonly List<ReadOnlyTree<T>> _children = new List<ReadOnlyTree<T>>();
+        private readonly T _item;
+        private readonly ReadOnlyTree<T> _parent;
 
         public ReadOnlyTree(T item, ReadOnlyTree<T> parent)
         {
             _item = item;
             _parent = parent;
-            if (parent != null) {
+            if (parent != null)
+            {
                 parent._children.Add(this);
             }
         }
@@ -187,10 +198,12 @@ namespace Hippie.Core
         {
             var queue = new Queue<ReadOnlyTree<T>>();
             queue.Enqueue(this);
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var t = queue.Dequeue();
                 yield return t;
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     queue.Enqueue(c);
                 }
             }
@@ -200,10 +213,12 @@ namespace Hippie.Core
         {
             var queue = new Queue<ReadOnlyTree<T>>();
             queue.Enqueue(this);
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var t = queue.Dequeue();
                 visitor(t);
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     queue.Enqueue(c);
                 }
             }
@@ -211,14 +226,16 @@ namespace Hippie.Core
 
         public IEnumerable<TRet> BreadthFirstVisit<TRet>(Func<IReadOnlyTree<T>, TRet, TRet> visitor, TRet start)
         {
-            var queue = new Queue<Pair<ReadOnlyTree<T>, TRet>>();
-            queue.Enqueue(Pair.Create(this, start));
-            while (queue.Count > 0) {
+            var queue = new Queue<GPair<ReadOnlyTree<T>, TRet>>();
+            queue.Enqueue(GPair.Create(this, start));
+            while (queue.Count > 0)
+            {
                 var tuple = queue.Dequeue();
                 var res = visitor(tuple.First, tuple.Second);
                 yield return res;
-                foreach (var c in tuple.First._children) {
-                    queue.Enqueue(Pair.Create(c, res));
+                foreach (var c in tuple.First._children)
+                {
+                    queue.Enqueue(GPair.Create(c, res));
                 }
             }
         }
@@ -227,10 +244,12 @@ namespace Hippie.Core
         {
             var stack = new Stack<ReadOnlyTree<T>>();
             stack.Push(this);
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var t = stack.Pop();
                 yield return t;
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     stack.Push(c);
                 }
             }
@@ -240,10 +259,12 @@ namespace Hippie.Core
         {
             var stack = new Stack<ReadOnlyTree<T>>();
             stack.Push(this);
-            while (stack.Count > 0) {
+            while (stack.Count > 0)
+            {
                 var t = stack.Pop();
                 visitor(t);
-                foreach (var c in t._children) {
+                foreach (var c in t._children)
+                {
                     stack.Push(c);
                 }
             }
@@ -251,14 +272,16 @@ namespace Hippie.Core
 
         public IEnumerable<TRet> DepthFirstVisit<TRet>(Func<IReadOnlyTree<T>, TRet, TRet> visitor, TRet start)
         {
-            var stack = new Stack<Pair<ReadOnlyTree<T>, TRet>>();
-            stack.Push(Pair.Create(this, start));
-            while (stack.Count > 0) {
+            var stack = new Stack<GPair<ReadOnlyTree<T>, TRet>>();
+            stack.Push(GPair.Create(this, start));
+            while (stack.Count > 0)
+            {
                 var tuple = stack.Pop();
                 var res = visitor(tuple.First, tuple.Second);
                 yield return res;
-                foreach (var c in tuple.First._children) {
-                    stack.Push(Pair.Create(c, res));
+                foreach (var c in tuple.First._children)
+                {
+                    stack.Push(GPair.Create(c, res));
                 }
             }
         }
