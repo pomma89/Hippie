@@ -24,11 +24,10 @@
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;USETHROWER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;USETHROWER</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>
-    </DocumentationFile>
+    <DocumentationFile>bin\Debug\DIBRIS.Hippie.xml</DocumentationFile>
     <CodeAnalysisRuleSet>Hippie.ruleset</CodeAnalysisRuleSet>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
@@ -76,14 +75,14 @@
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>none</DebugType>
+    <DebugType>pdbonly</DebugType>
     <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>USETHROWER</DefineConstants>
+    <DefineConstants>TRACE;USETHROWER</DefineConstants>
     <DocumentationFile>bin\Release\DIBRIS.Hippie.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
@@ -129,6 +128,7 @@
     <CodeContractsSuggestReadonly>True</CodeContractsSuggestReadonly>
     <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Unchecked|AnyCPU'">
     <OutputPath>bin\Release.Unchecked\</OutputPath>
@@ -233,28 +233,8 @@
     </None>
   </ItemGroup>
   <PropertyGroup>
-    <PostBuildEvent>set ASR=$(SolutionDir)Hippie.Packager.Unchecked/ASR/AssemblyRenamer.exe
-set ASR_ARGS=--out:ASR
-set ASR_IN=Hippie
-set ASR_OUT=Hippie.Unchecked
-
-set dir="$(SolutionDir)Hippie.Packager.Unchecked/lib/portable-win8+net45+sl5+wp8"
-if not exist %25dir%25 mkdir %25dir%25
-set dir="$(SolutionDir)Hippie.Packager/lib/portable-win8+net45+sl5+wp8"
-if not exist %25dir%25 mkdir %25dir%25
-
-if $(ConfigurationName) == Release.Unchecked (
-    mkdir ASR
-    %25ASR%25 %25ASR_ARGS%25 %25ASR_IN%25 %25ASR_OUT%25
-    copy %25ASR_IN%25.xml "ASR/%25ASR_OUT%25.xml"
-    copy "ASR\%25ASR_OUT%25.dll" "$(SolutionDir)Hippie.Packager.Unchecked/lib/portable-win8+net45+sl5+wp8"
-    copy "ASR\%25ASR_OUT%25.xml" "$(SolutionDir)Hippie.Packager.Unchecked/lib/portable-win8+net45+sl5+wp8"
-)
-
-if $(ConfigurationName) == Release (
-    copy "%25ASR_IN%25.dll" "$(SolutionDir)Hippie.Packager/lib/portable-win8+net45+sl5+wp8"
-    copy "%25ASR_IN%25.xml" "$(SolutionDir)Hippie.Packager/lib/portable-win8+net45+sl5+wp8"
-)</PostBuildEvent>
+    <PostBuildEvent>copy "$(TargetDir)DIBRIS.Hippie.dll" "$(SolutionDir)NuGet Packager/lib/portable-net45+win8+wp8+wpa81"
+copy "$(TargetDir)DIBRIS.Hippie.xml" "$(SolutionDir)NuGet Packager/lib/portable-net45+win8+wp8+wpa81"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
