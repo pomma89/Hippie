@@ -1,30 +1,25 @@
-// 
 // UniqueHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections;
@@ -34,10 +29,10 @@ namespace Hippie
 
     public sealed class UniqueHeap<TVal, TPr> : IHeap<TVal, TPr>
     {
-        readonly Func<TPr, TPr, int> _cmp;
-        readonly IEqualityComparer<TVal> _eqCmp;
-        readonly Dictionary<TVal, IHeapHandle<TVal, TPr>> _map;
-        readonly IRawHeap<TVal, TPr> _wrappedHeap;
+        private readonly Func<TPr, TPr, int> _cmp;
+        private readonly IEqualityComparer<TVal> _eqCmp;
+        private readonly Dictionary<TVal, IHeapHandle<TVal, TPr>> _map;
+        private readonly IRawHeap<TVal, TPr> _wrappedHeap;
 
         internal UniqueHeap(IRawHeap<TVal, TPr> heapToWrap, IEqualityComparer<TVal> eqCmp)
         {
@@ -101,12 +96,14 @@ namespace Hippie
 
         public bool Contains(TVal value, TPr priority)
         {
-            if (ReferenceEquals(priority, null)) {
+            if (ReferenceEquals(priority, null))
+            {
                 // There should be no handle with null priority.
                 return false;
             }
             IHeapHandle<TVal, TPr> handle;
-            if (_map.TryGetValue(value, out handle)) {
+            if (_map.TryGetValue(value, out handle))
+            {
                 return _cmp(handle.Priority, priority) == 0;
             }
             return false;
@@ -114,12 +111,14 @@ namespace Hippie
 
         public bool Contains(IHeapHandle<TVal, TPr> handle)
         {
-            if (ReferenceEquals(handle, null) || ReferenceEquals(handle.Priority, null)) {
+            if (ReferenceEquals(handle, null) || ReferenceEquals(handle.Priority, null))
+            {
                 // Handle should not be null and there should be no handle with null priority.
                 return false;
             }
             IHeapHandle<TVal, TPr> tmp;
-            if (_map.TryGetValue(handle.Value, out tmp)) {
+            if (_map.TryGetValue(handle.Value, out tmp))
+            {
                 return _cmp(handle.Priority, tmp.Priority) == 0;
             }
             return false;
@@ -140,21 +139,27 @@ namespace Hippie
             return _wrappedHeap.GetEnumerator();
         }
 
-        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other) where TVal2 : TVal where TPr2 : TPr
+        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other)
+            where TVal2 : TVal
+            where TPr2 : TPr
         {
-            if (ReferenceEquals(this, other) || other.Count == 0) {
+            if (ReferenceEquals(this, other) || other.Count == 0)
+            {
                 return;
             }
-            // Handles are cached to avoid enumerating other heap two times
-            // (it may be very costly, in particular for tree heaps).
+            // Handles are cached to avoid enumerating other heap two times (it may be very costly,
+            // in particular for tree heaps).
             var tmp = new List<IHeapHandle<TVal2, TPr2>>(other.Count);
-            foreach (var h in other) {
-                if (_map.ContainsKey(h.Value)) {
+            foreach (var h in other)
+            {
+                if (_map.ContainsKey(h.Value))
+                {
                     throw new ArgumentException(ErrorMessages.MergeConflict);
                 }
                 tmp.Add(h);
             }
-            foreach (var h in tmp) {
+            foreach (var h in tmp)
+            {
                 _map.Add(h.Value, _wrappedHeap.Add(h.Value, h.Priority));
             }
             other.Clear();
@@ -177,8 +182,10 @@ namespace Hippie
         public bool Remove(IHeapHandle<TVal, TPr> handle)
         {
             IHeapHandle<TVal, TPr> tmp;
-            if (_map.TryGetValue(handle.Value, out tmp)) {
-                if (_cmp(handle.Priority, tmp.Priority) == 0) {
+            if (_map.TryGetValue(handle.Value, out tmp))
+            {
+                if (_cmp(handle.Priority, tmp.Priority) == 0)
+                {
                     _map.Remove(handle.Value);
                     var hasRemoved = _wrappedHeap.Remove(tmp);
                     Debug.Assert(hasRemoved);
@@ -215,7 +222,8 @@ namespace Hippie
 
         public void UpdateValue(TVal value, TVal newValue)
         {
-            if (EqualityComparer.Equals(value, newValue)) {
+            if (EqualityComparer.Equals(value, newValue))
+            {
                 return;
             }
             var handle = _map[value];
@@ -229,7 +237,7 @@ namespace Hippie
             return _wrappedHeap.ToString();
         }
 
-        static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, TPr> tree, ReadOnlyTree<TVal, TPr> parent)
+        private static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, TPr> tree, ReadOnlyTree<TVal, TPr> parent)
         {
             return new ReadOnlyTree<TVal, TPr>(tree.Value, tree.Priority, parent);
         }

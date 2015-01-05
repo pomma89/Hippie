@@ -1,30 +1,25 @@
-﻿// 
-// IStableHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// IStableHeap.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections.Generic;
@@ -32,16 +27,17 @@ namespace Hippie
     using Contracts;
 
     /// <summary>
-    ///   A generic stable heap that supports all the operations that can be done
-    ///   in a reasonable amount of time on that data structure.<br/>
-    ///   This stable heap is an enumerable collection of heap handles; however, pairs are _not_
-    ///   granted to be visited in the order determined by <see cref="IRawHeap{TVal, TPr}.Comparer"/>.
+    ///   A generic stable heap that supports all the operations that can be done in a reasonable
+    ///   amount of time on that data structure. <br/> This stable heap is an enumerable collection
+    ///   of heap handles; however, pairs are _not_ granted to be visited in the order determined by <see cref="IRawHeap{TVal, TPr}.Comparer"/>.
     /// </summary>
     /// <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
-    /// <typeparam name="TPr">The type of the priorities associated with the values contained in the stable heap.</typeparam>
+    /// <typeparam name="TPr">
+    ///   The type of the priorities associated with the values contained in the stable heap.
+    /// </typeparam>
     /// <remarks>
-    ///   A stable raw heap allows the presence of duplicate values. Moreover, null values
-    ///   are allowed, while null priorities are not (to avoid issues with comparers).
+    ///   A stable raw heap allows the presence of duplicate values. Moreover, null values are
+    ///   allowed, while null priorities are not (to avoid issues with comparers).
     /// </remarks>
     [ContractClass(typeof(StableRawHeapContract<,>))]
     public interface IStableRawHeap<TVal, TPr> : IRawHeap<TVal, TPr>, IStableThinHeap<TVal, TPr>
@@ -69,8 +65,8 @@ namespace Hippie
         new IHeapHandle<TVal, IVersionedPriority<TPr>> Add(TVal val, TPr priority);
 
         /// <summary>
-        ///   Adds an handle with given value and given priority to the heap.
-        ///   Specified version will be used, instead of the default one.
+        ///   Adds an handle with given value and given priority to the heap. Specified version will
+        ///   be used, instead of the default one.
         /// </summary>
         /// <param name="val">The value to be added.</param>
         /// <param name="priority">The priority associated with given value.</param>

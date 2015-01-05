@@ -1,30 +1,25 @@
-﻿// 
-// IThinHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// IThinHeap.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections.Generic;
@@ -32,8 +27,8 @@ namespace Hippie
     using Contracts;
 
     /// <summary>
-    ///   Heaps can be seen as a partially ordered collection of (value, priority) pairs.
-    ///   This interface conceptually represents that kind of pair.
+    ///   Heaps can be seen as a partially ordered collection of (value, priority) pairs. This
+    ///   interface conceptually represents that kind of pair.
     /// </summary>
     /// <typeparam name="TVal">The type of <see cref="Value"/>.</typeparam>
     /// <typeparam name="TPr">The type of <see cref="Priority"/>.</typeparam>
@@ -51,8 +46,7 @@ namespace Hippie
     }
 
     /// <summary>
-    ///   Represents a priority with an version count that allows
-    ///   to make existing heaps stable.
+    ///   Represents a priority with an version count that allows to make existing heaps stable.
     /// </summary>
     /// <typeparam name="TPr">The type of <see cref="Value"/>.</typeparam>
     public interface IVersionedPriority<out TPr>
@@ -69,11 +63,13 @@ namespace Hippie
     }
 
     /// <summary>
-    ///   Represents an heap with a very low memory footprint, quick operations
-    ///   but with a low variety of operations allowed.
+    ///   Represents an heap with a very low memory footprint, quick operations but with a low
+    ///   variety of operations allowed.
     /// </summary>
     /// <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
-    /// <typeparam name="TPr">The type of the priorities associated with the values contained in the stable heap.</typeparam>
+    /// <typeparam name="TPr">
+    ///   The type of the priorities associated with the values contained in the stable heap.
+    /// </typeparam>
     [ContractClass(typeof(ThinHeapContract<,>))]
     public interface IThinHeap<TVal, TPr> : ICollection<IHeapHandle<TVal, TPr>>
     {
@@ -101,28 +97,29 @@ namespace Hippie
         /// </summary>
         /// <param name="val">The value to be added.</param>
         /// <param name="priority">The priority associated with given value.</param>
-        /// <exception cref="ArgumentException">
-        ///   Heap already contains <paramref name="val"/>.
-        /// </exception>
+        /// <exception cref="ArgumentException">Heap already contains <paramref name="val"/>.</exception>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="val"/> or <paramref name="priority"/> are null.
         /// </exception>
         void Add(TVal val, TPr priority);
 
         /// <summary>
-        ///   Moves all handles contained in <paramref name="other"/> into this heap. Since all handles are moved,
-        ///   not simply added to the heap, <paramref name="other"/> is emptied during the merge operation.
+        ///   Moves all handles contained in <paramref name="other"/> into this heap. Since all
+        ///   handles are moved, not simply added to the heap, <paramref name="other"/> is emptied
+        ///   during the merge operation.
         /// </summary>
         /// <param name="other">The heap to be merged.</param>
         /// <exception cref="ArgumentException">
-        ///   <paramref name="other"/> has not the same <see cref="IThinHeap{TVal, TPr}.Comparer"/> or it contains
-        ///   values which are already contained in this heap.
+        ///   <paramref name="other"/> has not the same <see cref="IThinHeap{TVal, TPr}.Comparer"/>
+        ///   or it contains values which are already contained in this heap.
         /// </exception>
         /// <exception cref="ArgumentNullException"><paramref name="other"/> is null.</exception>
         /// <exception cref="InvalidOperationException">
         ///   Adding all handles of <paramref name="other"/> would make this heap reach max capacity.
         /// </exception>
-        void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other) where TVal2 : TVal where TPr2 : TPr;
+        void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> other)
+            where TVal2 : TVal
+            where TPr2 : TPr;
 
         /// <summary>
         ///   Removes and returns the handle associated with the value having minimum priority.
@@ -135,8 +132,8 @@ namespace Hippie
         ///   Returns a snapshot of the current underlying tree structure of the heap.
         /// </summary>
         /// <remarks>
-        ///   Implementing this method should be optional, it was declared only to allow
-        ///   the study of the underlying data structure by creating something like a graphical tester.
+        ///   Implementing this method should be optional, it was declared only to allow the study
+        ///   of the underlying data structure by creating something like a graphical tester.
         /// </remarks>
         /// <returns>A snapshot of the current underlying tree structure of the heap.</returns>
         [Pure]
@@ -144,11 +141,13 @@ namespace Hippie
     }
 
     /// <summary>
-    ///   Represents a stable heap with a very low memory footprint, quick operations
-    ///   but with a low variety of operations allowed.
+    ///   Represents a stable heap with a very low memory footprint, quick operations but with a low
+    ///   variety of operations allowed.
     /// </summary>
     /// <typeparam name="TVal">The type of the values contained in the stable heap.</typeparam>
-    /// <typeparam name="TPr">The type of the priorities associated with the values contained in the stable heap.</typeparam>
+    /// <typeparam name="TPr">
+    ///   The type of the priorities associated with the values contained in the stable heap.
+    /// </typeparam>
     [ContractClass(typeof(StableThinHeapContract<,>))]
     public interface IStableThinHeap<TVal, TPr> : IThinHeap<TVal, TPr>
     {
@@ -166,8 +165,8 @@ namespace Hippie
         long NextVersion { get; }
 
         /// <summary>
-        ///   Adds an handle with given value and given priority to the heap.
-        ///   Specified version will be used, instead of the default one.
+        ///   Adds an handle with given value and given priority to the heap. Specified version will
+        ///   be used, instead of the default one.
         /// </summary>
         /// <param name="value">The value to be added.</param>
         /// <param name="priority">The priority associated with given value.</param>

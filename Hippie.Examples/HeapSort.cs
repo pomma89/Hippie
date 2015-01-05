@@ -28,6 +28,7 @@ namespace Hippie.Examples
 {
     using System;
     using System.Collections.Generic;
+    using DIBRIS.Hippie;
 
     static class HeapSort
     {

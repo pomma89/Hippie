@@ -1,30 +1,25 @@
-﻿// 
-// ThinHeap.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+﻿// ThinHeap.cs
+// 
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-namespace Hippie
+namespace DIBRIS.Hippie
 {
     using System;
     using System.Collections;
@@ -32,47 +27,46 @@ namespace Hippie
     using System.Diagnostics;
     using System.Linq;
     using Core;
+    using PommaLabs;
 
     public sealed class ThinHeap<TVal, TPr> : IThinHeap<TVal, TPr>
     {
         /// <summary>
         ///   The index from which handles are stored.
         /// </summary>
-        const int MinIndex = 0;
+        private const int MinIndex = 0;
 
         /// <summary>
         ///   The minimum size of the array containing the handles.
         /// </summary>
-        const int MinSize = 8;
+        private const int MinSize = 8;
 
         /// <summary>
-        ///   The factor used to increment the size of the array
-        ///   containing the handles.
+        ///   The factor used to increment the size of the array containing the handles.
         /// </summary>
-        const int IncreaseFactor = 2;
+        private const int IncreaseFactor = 2;
 
         /// <summary>
-        ///   The factor used to decrement the size of the array
-        ///   containing the handles.
+        ///   The factor used to decrement the size of the array containing the handles.
         /// </summary>
-        const int DecreaseFactor = IncreaseFactor*IncreaseFactor;
+        private const int DecreaseFactor = IncreaseFactor * IncreaseFactor;
 
-        readonly Func<TPr, TPr, int> _cmp;
+        private readonly Func<TPr, TPr, int> _cmp;
 
         /// <summary>
         ///   The comparer used to compare the priority of items.
         /// </summary>
-        readonly IComparer<TPr> _comparer;
+        private readonly IComparer<TPr> _comparer;
 
         /// <summary>
         ///   The comparer used to compare the equality of items.
         /// </summary>
-        readonly IEqualityComparer<TVal> _equalityComparer;
+        private readonly IEqualityComparer<TVal> _equalityComparer;
 
         /// <summary>
         ///   The array into which handles are stored.
         /// </summary>
-        Item[] _items;
+        private Item[] _items;
 
         internal ThinHeap(IComparer<TPr> comparer, IEqualityComparer<TVal> equalityComparer)
         {
@@ -132,13 +126,12 @@ namespace Hippie
 
         public IEnumerator<IHeapHandle<TVal, TPr>> GetEnumerator()
         {
-// ReSharper disable LoopCanBeConvertedToQuery
-// ReSharper disable ForCanBeConvertedToForeach
-            for (var i = MinIndex; i < Count; ++i) {
+            // ReSharper disable LoopCanBeConvertedToQuery ReSharper disable ForCanBeConvertedToForeach
+            for (var i = MinIndex; i < Count; ++i)
+            {
                 yield return _items[i];
             }
-// ReSharper restore ForCanBeConvertedToForeach
-// ReSharper restore LoopCanBeConvertedToQuery
+            // ReSharper restore ForCanBeConvertedToForeach ReSharper restore LoopCanBeConvertedToQuery
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -146,31 +139,39 @@ namespace Hippie
             return GetEnumerator();
         }
 
-        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap) where TVal2 : TVal where TPr2 : TPr
+        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap)
+            where TVal2 : TVal
+            where TPr2 : TPr
         {
-            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0) {
+            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0)
+            {
                 return;
             }
             var other = otherHeap as ThinHeap<TVal, TPr>;
-            if (other != null) {
+            if (other != null)
+            {
                 var otherItems = other._items;
-                for (var i = MinIndex; i < other.Count; ++i) {
+                for (var i = MinIndex; i < other.Count; ++i)
+                {
                     Add(otherItems[i]);
                 }
                 other.Clear();
                 return;
             }
             var other2 = otherHeap as ThinHeap<TVal2, TPr2>;
-            if (other2 != null) {
+            if (other2 != null)
+            {
                 var other2Items = other2._items;
-                for (var i = MinIndex; i < other2.Count; ++i) {
+                for (var i = MinIndex; i < other2.Count; ++i)
+                {
                     var otherItem = other2Items[i];
                     Add(new Item(otherItem.Value, otherItem.Priority));
                 }
                 other2.Clear();
                 return;
             }
-            while (otherHeap.Count != 0) {
+            while (otherHeap.Count != 0)
+            {
                 var otherMin = otherHeap.RemoveMin();
                 Add(new Item(otherMin.Value, otherMin.Priority));
             }
@@ -187,18 +188,22 @@ namespace Hippie
             var last = _items[--Count];
 
             // If we have an empty heap, we should not swap any element.
-            if (Count == 0) {
+            if (Count == 0)
+            {
                 return min;
             }
 
             var idx = 0;
             int j;
-            while ((j = 2*idx + 1) < Count) {
+            while ((j = 2 * idx + 1) < Count)
+            {
                 var mc = _items[j]; // Min child
-                if (j + 1 < Count && _cmp(_items[j + 1].Priority, mc.Priority) < 0) {
+                if (j + 1 < Count && _cmp(_items[j + 1].Priority, mc.Priority) < 0)
+                {
                     mc = _items[++j];
                 }
-                if (_comparer.Compare(last.Priority, mc.Priority) <= 0) {
+                if (_comparer.Compare(last.Priority, mc.Priority) <= 0)
+                {
                     break;
                 }
                 _items[idx] = mc;
@@ -206,7 +211,8 @@ namespace Hippie
             }
             _items[idx] = last;
 
-            if (Count >= MinSize && Count*DecreaseFactor == _items.Length) {
+            if (Count >= MinSize && Count * DecreaseFactor == _items.Length)
+            {
                 Array.Resize(ref _items, Count);
             }
             CheckHandlesSize();
@@ -216,45 +222,53 @@ namespace Hippie
 
         public IEnumerable<IReadOnlyTree<TVal, TPr>> ToReadOnlyForest()
         {
-            if (Count == 0) {
+            if (Count == 0)
+            {
                 yield break;
             }
-            var queue = new Queue<Pair<IndexedItem, ReadOnlyTree<TVal, TPr>>>();
+            var queue = new Queue<GPair<IndexedItem, ReadOnlyTree<TVal, TPr>>>();
             var indexedItem = new IndexedItem(_items[MinIndex], MinIndex);
-            queue.Enqueue(Pair.Create(indexedItem, (ReadOnlyTree<TVal, TPr>) null));
+            queue.Enqueue(GPair.Create(indexedItem, (ReadOnlyTree<TVal, TPr>) null));
             ReadOnlyTree<TVal, TPr> root = null;
-            while (queue.Count > 0) {
+            while (queue.Count > 0)
+            {
                 var vi = queue.Dequeue();
                 var it = vi.First;
                 var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Second);
-                if (root == null) {
+                if (root == null)
+                {
                     root = t;
                 }
-                var start = 2*it.Index + 1;
-                for (var i = 0; i < 2 && i + start < Count; ++i) {
+                var start = 2 * it.Index + 1;
+                for (var i = 0; i < 2 && i + start < Count; ++i)
+                {
                     var idx = start + i;
                     indexedItem = new IndexedItem(_items[idx], idx);
-                    queue.Enqueue(Pair.Create(indexedItem, t));
+                    queue.Enqueue(GPair.Create(indexedItem, t));
                 }
             }
             yield return root;
         }
 
-        void Add(Item item)
+        private void Add(Item item)
         {
-            if (Count == _items.Length) {
-                Array.Resize(ref _items, Count*IncreaseFactor);
+            if (Count == _items.Length)
+            {
+                Array.Resize(ref _items, Count * IncreaseFactor);
             }
             var idx = Count++;
             CheckHandlesSize();
 
-            while (true) {
-                if (idx == MinIndex) {
+            while (true)
+            {
+                if (idx == MinIndex)
+                {
                     break;
                 }
                 var j = (idx - 1) >> 1;
                 var parent = _items[j];
-                if (_cmp(item.Priority, parent.Priority) >= 0) {
+                if (_cmp(item.Priority, parent.Priority) >= 0)
+                {
                     break;
                 }
                 _items[idx] = parent;
@@ -264,11 +278,12 @@ namespace Hippie
         }
 
         [Conditional("DEBUG")]
-        void CheckHandlesSize()
+        private void CheckHandlesSize()
         {
-            Debug.Assert(DecreaseFactor == IncreaseFactor*IncreaseFactor);
-            if (Count <= MinSize) {
-                Debug.Assert(_items.Length == MinSize || _items.Length == MinSize*2);
+            Debug.Assert(DecreaseFactor == IncreaseFactor * IncreaseFactor);
+            if (Count <= MinSize)
+            {
+                Debug.Assert(_items.Length == MinSize || _items.Length == MinSize * 2);
                 return;
             }
             var expectedLog = Math.Log(_items.Length, IncreaseFactor);
@@ -276,10 +291,10 @@ namespace Hippie
             Debug.Assert(expectedLog.Equals(foundLog) || expectedLog.Equals(foundLog + 1));
         }
 
-        sealed class IndexedItem : IHeapHandle<TVal, TPr>
+        private sealed class IndexedItem : IHeapHandle<TVal, TPr>
         {
             public readonly Int32 Index;
-            readonly Item _item;
+            private readonly Item _item;
 
             public IndexedItem(Item item, Int32 index)
             {
@@ -298,7 +313,7 @@ namespace Hippie
             }
         }
 
-        sealed class Item : IHeapHandle<TVal, TPr>
+        private sealed class Item : IHeapHandle<TVal, TPr>
         {
             public readonly TPr Priority;
             public readonly TVal Value;
@@ -328,8 +343,8 @@ namespace Hippie
 
     public sealed class StableThinHeap<TVal, TPr> : IStableThinHeap<TVal, TPr>
     {
-        readonly IComparer<TPr> _comparer;
-        readonly IThinHeap<TVal, IVersionedPriority<TPr>> _wrappedHeap;
+        private readonly IComparer<TPr> _comparer;
+        private readonly IThinHeap<TVal, IVersionedPriority<TPr>> _wrappedHeap;
 
         internal StableThinHeap(IComparer<TPr> comparer, IEqualityComparer<TVal> equalityComparer, long initialVersion)
         {
@@ -410,13 +425,12 @@ namespace Hippie
 
         public IEnumerator<IHeapHandle<TVal, TPr>> GetEnumerator()
         {
-// ReSharper disable LoopCanBeConvertedToQuery
-// ReSharper disable ForCanBeConvertedToForeach
-            foreach (var handle in _wrappedHeap) {
+            // ReSharper disable LoopCanBeConvertedToQuery ReSharper disable ForCanBeConvertedToForeach
+            foreach (var handle in _wrappedHeap)
+            {
                 yield return new StableHandle<TVal, TPr>(handle);
             }
-// ReSharper restore ForCanBeConvertedToForeach
-// ReSharper restore LoopCanBeConvertedToQuery
+            // ReSharper restore ForCanBeConvertedToForeach ReSharper restore LoopCanBeConvertedToQuery
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -424,12 +438,16 @@ namespace Hippie
             return GetEnumerator();
         }
 
-        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap) where TVal2 : TVal where TPr2 : TPr
+        public void Merge<TVal2, TPr2>(IThinHeap<TVal2, TPr2> otherHeap)
+            where TVal2 : TVal
+            where TPr2 : TPr
         {
-            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0) {
+            if (ReferenceEquals(this, otherHeap) || otherHeap.Count == 0)
+            {
                 return;
             }
-            while (otherHeap.Count > 0) {
+            while (otherHeap.Count > 0)
+            {
                 var otherMin = otherHeap.RemoveMin();
                 _wrappedHeap.Add(otherMin.Value, new VersionedPriority<TPr>(otherMin.Priority, NextVersion++));
             }
@@ -452,24 +470,25 @@ namespace Hippie
 
         public IEnumerable<IReadOnlyTree<TVal, TPr>> ToReadOnlyForest()
         {
-// ReSharper disable LoopCanBeConvertedToQuery
-            foreach (var t in _wrappedHeap.ToReadOnlyForest()) {
+            // ReSharper disable LoopCanBeConvertedToQuery
+            foreach (var t in _wrappedHeap.ToReadOnlyForest())
+            {
                 var tt = t.BreadthFirstVisit<ReadOnlyTree<TVal, TPr>>(TransformTree, null);
                 yield return tt.ToList()[0];
             }
-// ReSharper restore LoopCanBeConvertedToQuery
+            // ReSharper restore LoopCanBeConvertedToQuery
         }
 
-        static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, IVersionedPriority<TPr>> tree,
+        private static ReadOnlyTree<TVal, TPr> TransformTree(IReadOnlyTree<TVal, IVersionedPriority<TPr>> tree,
                                                      ReadOnlyTree<TVal, TPr> parent)
         {
             return new ReadOnlyTree<TVal, TPr>(tree.Value, tree.Priority.Value, parent);
         }
     }
 
-    sealed class StableComparer<TPr> : IComparer<IVersionedPriority<TPr>>
+    internal sealed class StableComparer<TPr> : IComparer<IVersionedPriority<TPr>>
     {
-        readonly Func<TPr, TPr, int> _originalCmp;
+        private readonly Func<TPr, TPr, int> _originalCmp;
 
         public StableComparer(Func<TPr, TPr, int> originalCmp)
         {
@@ -483,7 +502,7 @@ namespace Hippie
         }
     }
 
-    sealed class StableHandle<TVal, TPr> : IHeapHandle<TVal, TPr>
+    internal sealed class StableHandle<TVal, TPr> : IHeapHandle<TVal, TPr>
     {
         public readonly IHeapHandle<TVal, IVersionedPriority<TPr>> Handle;
 
@@ -508,10 +527,10 @@ namespace Hippie
         }
     }
 
-    sealed class VersionedPriority<TPr> : IVersionedPriority<TPr>
+    internal sealed class VersionedPriority<TPr> : IVersionedPriority<TPr>
     {
-        readonly TPr _value;
-        readonly long _version;
+        private readonly TPr _value;
+        private readonly long _version;
 
         public VersionedPriority(TPr value, long version)
         {

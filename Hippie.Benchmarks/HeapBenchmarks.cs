@@ -29,7 +29,8 @@ namespace Hippie.Benchmarks
     using System;
     using System.Linq;
     using Benjamin.Framework;
-    using Tests;
+    using DIBRIS.Hippie;
+    using UnitTests;
 
     [BenchmarkFixture]
     public abstract class BaseHeapBenchmarks<TVal>
