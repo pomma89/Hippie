@@ -3,7 +3,7 @@
 <package>
     <metadata>
         <id>Hippie</id>
-        <version>2.0.1</version>
+        <version>2.9.0</version>
         <title>DIBRIS.Hippie</title>
         <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
         <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
@@ -13,13 +13,16 @@ NOTICE: If you need more performance, please have a look at the Hippie.Unchecked
         </description>
         <releaseNotes>
 * Library is fully portable, but it also works on .NET 4.0, client profile.
+* Removed dependency on Slinky, now using GRAMPA.
+* Unchecked version is not maintained anymore.
+* New namespace (DIBRIS.Hippie), stable.
         </releaseNotes>
         <summary>
 Fully managed library providing five types of heap.
         </summary>
         <language>en-US</language>
         <projectUrl>https://bitbucket.org/pomma89/hippie/overview</projectUrl>
-        <iconUrl>http://pomma89.altervista.it/hippie/logo.png</iconUrl>
+        <iconUrl>https://googledrive.com/host/0B8v0ikF4z2BiR29YQmxfSlE1Sms/Progetti/Hippie/logo-128.png</iconUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <copyright>Copyright (c) 2012-2014 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>
