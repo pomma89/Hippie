@@ -1,6 +1,6 @@
-// AssemblyInfo.cs
+// File name: AssemblyInfo.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -25,7 +25,6 @@ using System.Security;
 
 // General Information about an assembly is controlled through the following set of attributes.
 // Change these attribute values to modify the information associated with an assembly.
-
 [assembly: AssemblyTitle("DIBRIS.Hippie")]
 [assembly: AssemblyDescription("Fully managed library providing five types of heap.")]
 [assembly: AssemblyConfiguration("")]
@@ -46,9 +45,7 @@ using System.Security;
 
 // Common Language Specification (CLS) compliance generally refers to the claim that CLS rules and
 // restrictions are being followed.
-
 [assembly: CLSCompliant(true)]
 
 // Specifies that an assembly cannot cause an elevation of privilege.
-
 [assembly: SecurityTransparent]
