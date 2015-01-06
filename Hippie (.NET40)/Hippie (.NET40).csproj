@@ -223,7 +223,8 @@
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(TargetDir)DIBRIS.Hippie.dll" "$(SolutionDir)NuGet Packager/lib/net40-client"
+    <PostBuildEvent>if not exist "$(SolutionDir)NuGet Packager/lib/net40-client" mkdir "$(SolutionDir)NuGet Packager/lib/net40-client"
+copy "$(TargetDir)DIBRIS.Hippie.dll" "$(SolutionDir)NuGet Packager/lib/net40-client"
 copy "$(TargetDir)DIBRIS.Hippie.xml" "$(SolutionDir)NuGet Packager/lib/net40-client"</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
