@@ -39,7 +39,7 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>Hippie.Examples.Launcher</StartupObject>
+    <StartupObject>Examples.Launcher</StartupObject>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Unchecked|AnyCPU'">
     <OutputPath>bin\Release.Unchecked\</OutputPath>

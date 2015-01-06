@@ -24,13 +24,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
 
-namespace Hippie.Examples
+namespace Examples
 {
     using System;
 
     public static class Launcher
     {
-        public static void Main()
+        public static void Main(string[] args)
         {
             Console.WriteLine("# HeapSort #");
             HeapSort.Main();
