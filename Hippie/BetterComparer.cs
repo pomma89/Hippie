@@ -25,7 +25,7 @@ namespace DIBRIS.Hippie
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using PommaLabs.Portability;
+    using Portability;
 
     /// <summary>
     ///   A class offering a better default comparer for given type parameter

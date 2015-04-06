@@ -24,13 +24,11 @@ namespace DIBRIS.Hippie.Core
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using DIBRIS.Hippie;
-    using PommaLabs;
-    using PommaLabs.Collections;
+    using Collections;
 
     public abstract class TreeHeap<TVal, TPr> : RawHeap<TVal, TPr, TreeHeap<TVal, TPr>.TreeHandle>
     {
-        protected Tree MinTree;
+        internal Tree MinTree;
 
         /// <summary>
         ///   Used to give a "version" to each node. When the heap is cleared, the version is
@@ -61,7 +59,7 @@ namespace DIBRIS.Hippie.Core
             return (handle == null || handle.Version == null || handle.Version.Id != Version.Id) ? null : handle;
         }
 
-        protected Tree Meld(Tree t1, Tree t2)
+        internal Tree Meld(Tree t1, Tree t2)
         {
             // It is a mistake to meld the same trees.
             Debug.Assert(!ReferenceEquals(t1, t2));
@@ -77,12 +75,12 @@ namespace DIBRIS.Hippie.Core
             return t2;
         }
 
-        protected Tree NullMeld(Tree t1, Tree t2)
+        internal Tree NullMeld(Tree t1, Tree t2)
         {
             return (t1 == null) ? t2 : (t2 == null) ? t1 : Meld(t1, t2);
         }
 
-        public sealed class Tree
+        internal sealed class Tree
         {
             public readonly SinglyLinkedList<Tree> Children = new SinglyLinkedList<Tree>();
             public TreeHandle Handle;
@@ -170,10 +168,10 @@ namespace DIBRIS.Hippie.Core
 
         public sealed class TreeHandle : IHeapHandle<TVal, TPr>, IItem
         {
-            public Tree Tree;
-            public TreeVersion Version;
+            internal Tree Tree;
+            internal TreeVersion Version;
 
-            public TreeHandle(TVal val, TPr pr, TreeVersion version, Tree tree)
+            internal TreeHandle(TVal val, TPr pr, TreeVersion version, Tree tree)
             {
                 Value = val;
                 Priority = pr;

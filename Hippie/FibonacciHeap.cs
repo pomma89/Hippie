@@ -24,8 +24,8 @@ namespace DIBRIS.Hippie
     using System;
     using System.Collections;
     using System.Collections.Generic;
+    using Collections;
     using Core;
-    using PommaLabs.Collections;
 
     public sealed class FibonacciHeap<TVal, TPr> : TreeHeap<TVal, TPr>, IRawHeap<TVal, TPr>
     {

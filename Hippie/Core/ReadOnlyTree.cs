@@ -24,8 +24,6 @@ namespace DIBRIS.Hippie.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DIBRIS.Hippie;
-    using PommaLabs;
 
     internal sealed class ReadOnlyTree<TVal, TPr> : IReadOnlyTree<TVal, TPr>
     {
