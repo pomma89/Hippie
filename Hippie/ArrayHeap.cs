@@ -27,7 +27,6 @@ namespace DIBRIS.Hippie
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using Core;
-    using PommaLabs;
 
     public sealed class ArrayHeap<TVal, TPr> : RawHeap<TVal, TPr, ArrayHeap<TVal, TPr>.ArrayHandle>, IRawHeap<TVal, TPr>
     {

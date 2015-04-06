@@ -18,13 +18,14 @@
     <MinimumVisualStudioVersion>10.0</MinimumVisualStudioVersion>
     <CodeContractsAssemblyMode>1</CodeContractsAssemblyMode>
     <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>330263e3</NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>False</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;USETHROWER</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;USETHROWER PORTABLE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Debug\DIBRIS.Hippie.xml</DocumentationFile>
@@ -82,7 +83,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DefineConstants>TRACE;USETHROWER</DefineConstants>
+    <DefineConstants>TRACE;USETHROWER PORTABLE</DefineConstants>
     <DocumentationFile>bin\Release\DIBRIS.Hippie.xml</DocumentationFile>
     <Prefer32Bit>false</Prefer32Bit>
     <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
@@ -177,7 +178,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
-      <HintPath>..\packages\Newtonsoft.Json.6.0.7\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
+      <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net45+wp80+win8+wpa81+aspnetcore50\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="PommaLabs.ConcurrentWorkQueue">
       <HintPath>..\packages\PommaLabs.ConcurrentWorkQueue.0.9.1\lib\portable-win8+net40+sl5+wp8\PommaLabs.ConcurrentWorkQueue.dll</HintPath>
@@ -196,6 +197,50 @@
     <Compile Include="Contracts\ThinHeapContract.cs" />
     <Compile Include="Contracts\UniqueHeapContract.cs" />
     <Compile Include="Core\ExtensionMethods.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentDictionary.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentDoublyLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentHashLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentQueue.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentSinglyLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\Concurrent\ConcurrentThinLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\Contracts\LinkedListsContracts.cs" />
+    <Compile Include="GRAMPA\Collections\Core\LinkedListsBases.cs" />
+    <Compile Include="GRAMPA\Collections\Core\LinkedListsNodes.cs" />
+    <Compile Include="GRAMPA\Collections\DoublyLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\HashLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\LinkedListsInterfaces.cs" />
+    <Compile Include="GRAMPA\Collections\LinkedQueue.cs" />
+    <Compile Include="GRAMPA\Collections\LinkedStack.cs" />
+    <Compile Include="GRAMPA\Collections\ReadOnly\ReadOnlyDictionary.cs" />
+    <Compile Include="GRAMPA\Collections\ReadOnly\ReadOnlyList.cs" />
+    <Compile Include="GRAMPA\Collections\SinglyLinkedList.cs" />
+    <Compile Include="GRAMPA\Collections\ThinLinkedList.cs" />
+    <Compile Include="GRAMPA\Constants.cs" />
+    <Compile Include="GRAMPA\Core\ErrorMessages.cs" />
+    <Compile Include="GRAMPA\Diagnostics\Raise.cs" />
+    <Compile Include="GRAMPA\Environment.cs" />
+    <Compile Include="GRAMPA\EquatableObject.cs" />
+    <Compile Include="GRAMPA\Extensions\BooleanExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\DataTableExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\DecimalExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\DelegateExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\DoubleExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\EventExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\IntegerExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\ObjectExtensions.cs" />
+    <Compile Include="GRAMPA\Extensions\StringExtensions.cs" />
+    <Compile Include="GRAMPA\FormattableObject.cs" />
+    <Compile Include="GRAMPA\PairAndTriple.cs" />
+    <Compile Include="GRAMPA\Portability\SerializableAttribute.cs" />
+    <Compile Include="GRAMPA\Portability\TypeInfo.cs" />
+    <Compile Include="GRAMPA\Reflection\ServiceLocator.cs" />
+    <Compile Include="GRAMPA\Testing\RandomDataTableGenerator.cs" />
+    <Compile Include="GRAMPA\Text\DiffMatchPatch.cs" />
+    <Compile Include="GRAMPA\Text\FastReplacer.cs" />
+    <Compile Include="GRAMPA\Threading\ConcurrentWorkQueue.cs" />
+    <Compile Include="GRAMPA\Tuples.cs" />
+    <Compile Include="GRAMPA\XML\DynamicXml.cs" />
     <Compile Include="StableHeap.cs" />
     <Compile Include="ThinHeap.cs" />
     <Compile Include="IStableHeap.cs" />
@@ -243,5 +288,7 @@ copy "$(TargetDir)DIBRIS.Hippie.xml" "$(SolutionDir)NuGet Packager/lib/portable-
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
+  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
 </Project>

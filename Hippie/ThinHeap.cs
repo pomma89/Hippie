@@ -27,7 +27,6 @@ namespace DIBRIS.Hippie
     using System.Diagnostics;
     using System.Linq;
     using Core;
-    using PommaLabs;
 
     public sealed class ThinHeap<TVal, TPr> : IThinHeap<TVal, TPr>
     {

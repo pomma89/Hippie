@@ -25,8 +25,8 @@ namespace DIBRIS.Hippie
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
+    using Collections;
     using Core;
-    using PommaLabs.Collections;
 
     public sealed class MultiHeap<TVal> : IHeap<TVal>
     {
