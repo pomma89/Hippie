@@ -113,7 +113,7 @@ namespace DIBRIS.Hippie.Collections.Contracts
             Contract.Requires<ArgumentNullException>(list != null, ErrorMessages.NullList);
             Contract.Ensures(Count == Contract.OldValue(Count) + Contract.OldValue(list.Count));
             Contract.Ensures(list.Count == 0);
-            Contract.Ensures(EqualityComparer.Equals(Last, Contract.OldValue(list.Last)));
+            Contract.Ensures(Contract.OldValue(list.Count) == 0 || EqualityComparer.Equals(Last, Contract.OldValue(list.Last)));
         }
 
         #region IThinLinkedList Members
