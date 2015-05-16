@@ -27,6 +27,7 @@ namespace DIBRIS.Hippie
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
     using Core;
+    using Finsa.CodeServices.Common;
 
     public sealed class ArrayHeap<TVal, TPr> : RawHeap<TVal, TPr, ArrayHeap<TVal, TPr>.ArrayHandle>, IRawHeap<TVal, TPr>
     {
@@ -171,14 +172,14 @@ namespace DIBRIS.Hippie
             {
                 yield break;
             }
-            var queue = new Queue<GPair<ArrayHandle, ReadOnlyTree<TVal, TPr>>>();
-            queue.Enqueue(GPair.Create(_handles[MinIndex], (ReadOnlyTree<TVal, TPr>) null));
+            var queue = new Queue<KeyValuePair<ArrayHandle, ReadOnlyTree<TVal, TPr>>>();
+            queue.Enqueue(KeyValuePair.Create(_handles[MinIndex], (ReadOnlyTree<TVal, TPr>) null));
             ReadOnlyTree<TVal, TPr> root = null;
             while (queue.Count > 0)
             {
                 var vi = queue.Dequeue();
-                var it = vi.First;
-                var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Second);
+                var it = vi.Key;
+                var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Value);
                 if (it.Index == MinIndex)
                 {
                     root = t;
@@ -186,7 +187,7 @@ namespace DIBRIS.Hippie
                 var start = _cc * it.Index + 1;
                 for (var i = 0; i < _cc && i + start < Count; ++i)
                 {
-                    queue.Enqueue(GPair.Create(_handles[start + i], t));
+                    queue.Enqueue(KeyValuePair.Create(_handles[start + i], t));
                 }
             }
             yield return root;

@@ -26,7 +26,6 @@ namespace DIBRIS.Hippie.Contracts
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using Core;
-    using DIBRIS.Hippie;
 
     [ContractClassFor(typeof(IThinHeap<,>))]
     internal abstract class ThinHeapContract<TVal, TPr> : IThinHeap<TVal, TPr>

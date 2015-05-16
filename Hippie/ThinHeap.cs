@@ -27,6 +27,7 @@ namespace DIBRIS.Hippie
     using System.Diagnostics;
     using System.Linq;
     using Core;
+    using Finsa.CodeServices.Common;
 
     public sealed class ThinHeap<TVal, TPr> : IThinHeap<TVal, TPr>
     {
@@ -225,15 +226,15 @@ namespace DIBRIS.Hippie
             {
                 yield break;
             }
-            var queue = new Queue<GPair<IndexedItem, ReadOnlyTree<TVal, TPr>>>();
+            var queue = new Queue<KeyValuePair<IndexedItem, ReadOnlyTree<TVal, TPr>>>();
             var indexedItem = new IndexedItem(_items[MinIndex], MinIndex);
-            queue.Enqueue(GPair.Create(indexedItem, (ReadOnlyTree<TVal, TPr>) null));
+            queue.Enqueue(KeyValuePair.Create(indexedItem, (ReadOnlyTree<TVal, TPr>) null));
             ReadOnlyTree<TVal, TPr> root = null;
             while (queue.Count > 0)
             {
                 var vi = queue.Dequeue();
-                var it = vi.First;
-                var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Second);
+                var it = vi.Key;
+                var t = new ReadOnlyTree<TVal, TPr>(it.Value, it.Priority, vi.Value);
                 if (root == null)
                 {
                     root = t;
@@ -243,7 +244,7 @@ namespace DIBRIS.Hippie
                 {
                     var idx = start + i;
                     indexedItem = new IndexedItem(_items[idx], idx);
-                    queue.Enqueue(GPair.Create(indexedItem, t));
+                    queue.Enqueue(KeyValuePair.Create(indexedItem, t));
                 }
             }
             yield return root;

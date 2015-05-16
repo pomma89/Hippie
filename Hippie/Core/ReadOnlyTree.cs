@@ -24,6 +24,7 @@ namespace DIBRIS.Hippie.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using Finsa.CodeServices.Common;
 
     internal sealed class ReadOnlyTree<TVal, TPr> : IReadOnlyTree<TVal, TPr>
     {
@@ -95,16 +96,16 @@ namespace DIBRIS.Hippie.Core
 
         public IEnumerable<TRet> BreadthFirstVisit<TRet>(Func<IReadOnlyTree<TVal, TPr>, TRet, TRet> visitor, TRet start)
         {
-            var queue = new Queue<GPair<ReadOnlyTree<TVal, TPr>, TRet>>();
-            queue.Enqueue(GPair.Create(this, start));
+            var queue = new Queue<KeyValuePair<ReadOnlyTree<TVal, TPr>, TRet>>();
+            queue.Enqueue(KeyValuePair.Create(this, start));
             while (queue.Count > 0)
             {
                 var tuple = queue.Dequeue();
-                var res = visitor(tuple.First, tuple.Second);
+                var res = visitor(tuple.Key, tuple.Value);
                 yield return res;
-                foreach (var c in tuple.First._children)
+                foreach (var c in tuple.Key._children)
                 {
-                    queue.Enqueue(GPair.Create(c, res));
+                    queue.Enqueue(KeyValuePair.Create(c, res));
                 }
             }
         }
@@ -141,16 +142,16 @@ namespace DIBRIS.Hippie.Core
 
         public IEnumerable<TRet> DepthFirstVisit<TRet>(Func<IReadOnlyTree<TVal, TPr>, TRet, TRet> visitor, TRet start)
         {
-            var stack = new Stack<GPair<ReadOnlyTree<TVal, TPr>, TRet>>();
-            stack.Push(GPair.Create(this, start));
+            var stack = new Stack<KeyValuePair<ReadOnlyTree<TVal, TPr>, TRet>>();
+            stack.Push(KeyValuePair.Create(this, start));
             while (stack.Count > 0)
             {
                 var tuple = stack.Pop();
-                var res = visitor(tuple.First, tuple.Second);
+                var res = visitor(tuple.Key, tuple.Value);
                 yield return res;
-                foreach (var c in tuple.First._children)
+                foreach (var c in tuple.Key._children)
                 {
-                    stack.Push(GPair.Create(c, res));
+                    stack.Push(KeyValuePair.Create(c, res));
                 }
             }
         }
@@ -224,16 +225,16 @@ namespace DIBRIS.Hippie.Core
 
         public IEnumerable<TRet> BreadthFirstVisit<TRet>(Func<IReadOnlyTree<T>, TRet, TRet> visitor, TRet start)
         {
-            var queue = new Queue<GPair<ReadOnlyTree<T>, TRet>>();
-            queue.Enqueue(GPair.Create(this, start));
+            var queue = new Queue<KeyValuePair<ReadOnlyTree<T>, TRet>>();
+            queue.Enqueue(KeyValuePair.Create(this, start));
             while (queue.Count > 0)
             {
                 var tuple = queue.Dequeue();
-                var res = visitor(tuple.First, tuple.Second);
+                var res = visitor(tuple.Key, tuple.Value);
                 yield return res;
-                foreach (var c in tuple.First._children)
+                foreach (var c in tuple.Key._children)
                 {
-                    queue.Enqueue(GPair.Create(c, res));
+                    queue.Enqueue(KeyValuePair.Create(c, res));
                 }
             }
         }
@@ -270,16 +271,16 @@ namespace DIBRIS.Hippie.Core
 
         public IEnumerable<TRet> DepthFirstVisit<TRet>(Func<IReadOnlyTree<T>, TRet, TRet> visitor, TRet start)
         {
-            var stack = new Stack<GPair<ReadOnlyTree<T>, TRet>>();
-            stack.Push(GPair.Create(this, start));
+            var stack = new Stack<KeyValuePair<ReadOnlyTree<T>, TRet>>();
+            stack.Push(KeyValuePair.Create(this, start));
             while (stack.Count > 0)
             {
                 var tuple = stack.Pop();
-                var res = visitor(tuple.First, tuple.Second);
+                var res = visitor(tuple.Key, tuple.Value);
                 yield return res;
-                foreach (var c in tuple.First._children)
+                foreach (var c in tuple.Key._children)
                 {
-                    stack.Push(GPair.Create(c, res));
+                    stack.Push(KeyValuePair.Create(c, res));
                 }
             }
         }
