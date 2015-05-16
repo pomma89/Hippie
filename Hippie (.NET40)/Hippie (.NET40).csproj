@@ -235,6 +235,7 @@
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)NuGet Packager/lib/net40-client" mkdir "$(SolutionDir)NuGet Packager/lib/net40-client"
 copy "$(TargetDir)DIBRIS.Hippie.dll" "$(SolutionDir)NuGet Packager/lib/net40-client"
+copy "$(TargetDir)DIBRIS.Hippie.pdb" "$(SolutionDir)NuGet Packager/lib/net40-client"
 copy "$(TargetDir)DIBRIS.Hippie.xml" "$(SolutionDir)NuGet Packager/lib/net40-client"</PostBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
