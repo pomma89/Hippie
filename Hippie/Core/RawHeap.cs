@@ -25,7 +25,6 @@ namespace DIBRIS.Hippie.Core
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Diagnostics.Contracts;
-    using DIBRIS.Hippie;
 
     public abstract class RawHeap<TVal, TPr, TItem> where TItem : class, RawHeap<TVal, TPr, TItem>.IItem
     {

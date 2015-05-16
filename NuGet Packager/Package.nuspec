@@ -3,15 +3,15 @@
 <package>
     <metadata>
         <id>Hippie</id>
-        <version>2.9.1</version>
-        <title>DIBRIS.Hippie - Heaps and priority queues</title>
+        <version>2.9.2</version>
+        <title>Hippie - Heaps and priority queues</title>
         <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
         <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
         <description>
 Fully managed library providing five types of heap. It implements d-ary, binary, binomial, Fibonacci and pairing heaps, in order to let the user choose the best heap to fit her needs. Each heap has its own advantages and disadvantages: please see the documentation or Wikipedia to better understand how those data structures work and how they behave in each operation.
         </description>
         <releaseNotes>
-* Now dependency-free.
+* Using shared library.
         </releaseNotes>
         <summary>
 Fully managed library providing five types of heap.
@@ -22,7 +22,9 @@ Fully managed library providing five types of heap.
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
         <copyright>Copyright (c) 2012-2016 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>
-        <dependencies></dependencies>
+        <dependencies>
+            <dependency id="Finsa.CodeServices.Common" version="1.11" />
+        </dependencies>
         <references></references>
         <tags>heap binary binomial pairing fibonacci priority queue ternary quaternary stable</tags>
     </metadata>

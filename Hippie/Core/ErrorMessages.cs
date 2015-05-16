@@ -21,7 +21,7 @@
 
 namespace DIBRIS.Hippie.Core
 {
-    internal static partial class ErrorMessages
+    internal static class ErrorMessages
     {
         public const string DifferentComparers = "Merge is not allowed when heaps have not the same comparer.";
         public const string HandleContained = "Heap already contains given handle.";

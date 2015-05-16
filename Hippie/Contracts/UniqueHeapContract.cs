@@ -26,7 +26,6 @@ namespace DIBRIS.Hippie.Contracts
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using Core;
-    using DIBRIS.Hippie;
 
     [ContractClassFor(typeof(IHeap<,>))]
     internal abstract class UniqueHeapContract<TVal, TPr> : IHeap<TVal, TPr>

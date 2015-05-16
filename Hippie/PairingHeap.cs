@@ -25,8 +25,8 @@ namespace DIBRIS.Hippie
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using Collections;
     using Core;
+    using Finsa.CodeServices.Common.Collections;
 
     public sealed class PairingHeap<TVal, TPr> : TreeHeap<TVal, TPr>, IRawHeap<TVal, TPr>
     {

@@ -25,7 +25,7 @@ namespace DIBRIS.Hippie
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using Portability;
+    using Finsa.CodeServices.Common.Portability;
 
     /// <summary>
     ///   A class offering a better default comparer for given type parameter
@@ -44,13 +44,13 @@ namespace DIBRIS.Hippie
         {
             var type = typeof(T);
             var comparable = typeof(IComparable<T>);
-            if (GTypeInfo.GetInterfaces(type).FirstOrDefault(i => ReferenceEquals(i, comparable)) != null)
+            if (PortableTypeInfo.GetInterfaces(type).FirstOrDefault(i => ReferenceEquals(i, comparable)) != null)
             {
                 DefaultCmp = new DefaultComparer();
                 return;
             }
-            var baseCmp = typeof(BetterComparer<>).MakeGenericType(new[] { GTypeInfo.GetBaseType(type) });
-            var defCmp = GTypeInfo.GetProperties(baseCmp).First();
+            var baseCmp = typeof(BetterComparer<>).MakeGenericType(PortableTypeInfo.GetBaseType(type));
+            var defCmp = PortableTypeInfo.GetProperties(baseCmp).First();
             DefaultCmp = (IComparer<T>) defCmp.GetValue(null, null);
         }
 

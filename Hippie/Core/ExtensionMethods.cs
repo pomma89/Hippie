@@ -24,7 +24,6 @@ namespace DIBRIS.Hippie.Core
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DIBRIS.Hippie;
 
     internal static class ExtensionMethods
     {

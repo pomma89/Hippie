@@ -24,7 +24,8 @@ namespace DIBRIS.Hippie.Core
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
-    using Collections;
+    using Finsa.CodeServices.Common;
+    using Finsa.CodeServices.Common.Collections;
 
     public abstract class TreeHeap<TVal, TPr> : RawHeap<TVal, TPr, TreeHeap<TVal, TPr>.TreeHandle>
     {
@@ -140,21 +141,21 @@ namespace DIBRIS.Hippie.Core
 
             public IReadOnlyTree<TVal, TPr> ToReadOnlyTree()
             {
-                var queue = new Queue<GPair<Tree, ReadOnlyTree<TVal, TPr>>>();
-                queue.Enqueue(GPair.Create(this, (ReadOnlyTree<TVal, TPr>) null));
+                var queue = new Queue<KeyValuePair<Tree, ReadOnlyTree<TVal, TPr>>>();
+                queue.Enqueue(KeyValuePair.Create(this, (ReadOnlyTree<TVal, TPr>) null));
                 ReadOnlyTree<TVal, TPr> root = null;
                 while (queue.Count > 0)
                 {
                     var vi = queue.Dequeue();
-                    var it = vi.First;
-                    var t = new ReadOnlyTree<TVal, TPr>(it.Handle.Value, it.Priority, vi.Second);
+                    var it = vi.Key;
+                    var t = new ReadOnlyTree<TVal, TPr>(it.Handle.Value, it.Priority, vi.Value);
                     if (root == null)
                     {
                         root = t;
                     }
                     foreach (var c in it.Children)
                     {
-                        queue.Enqueue(GPair.Create(c, t));
+                        queue.Enqueue(KeyValuePair.Create(c, t));
                     }
                 }
                 return root;
