@@ -123,7 +123,7 @@
     <DocumentationFile>bin\Release\DIBRIS.Hippie.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>..\pomma89.snk</AssemblyOriginatorKeyFile>
