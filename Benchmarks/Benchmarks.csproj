@@ -43,17 +43,6 @@
     <DefineConstants>TRACE</DefineConstants>
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Unchecked|AnyCPU'">
-    <OutputPath>bin\Release.Unchecked\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <Optimize>True</Optimize>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
-    <DebugType>none</DebugType>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Benjamin.Framework, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>

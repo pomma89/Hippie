@@ -53,7 +53,7 @@
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
     <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
     <CodeContractsCustomRewriterAssembly />
     <CodeContractsCustomRewriterClass />
     <CodeContractsLibPaths />
@@ -64,7 +64,7 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsRuntimeCheckingLevel>Full</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
     <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
@@ -108,7 +108,7 @@
     <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
     <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
     <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>True</CodeContractsEmitXMLDocs>
+    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
     <CodeContractsCustomRewriterAssembly />
     <CodeContractsCustomRewriterClass />
     <CodeContractsLibPaths />
@@ -119,7 +119,7 @@
     <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
     <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
     <CodeContractsRuntimeCheckingLevel>ReleaseRequires</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>Build</CodeContractsReferenceAssembly>
+    <CodeContractsReferenceAssembly>%28none%29</CodeContractsReferenceAssembly>
     <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
     <CodeContractsAssertsToContractsCheckBox>True</CodeContractsAssertsToContractsCheckBox>
     <CodeContractsRedundantTests>True</CodeContractsRedundantTests>
@@ -131,51 +131,6 @@
     <CodeContractsSkipAnalysisIfCannotConnectToCache>False</CodeContractsSkipAnalysisIfCannotConnectToCache>
     <CodeContractsBeingOptimisticOnExternal>True</CodeContractsBeingOptimisticOnExternal>
     <DebugSymbols>true</DebugSymbols>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release.Unchecked|AnyCPU'">
-    <OutputPath>bin\Release.Unchecked\</OutputPath>
-    <Optimize>True</Optimize>
-    <DebugType>none</DebugType>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <ErrorReport>prompt</ErrorReport>
-    <CodeAnalysisRuleSet>Hippie.ruleset</CodeAnalysisRuleSet>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release.Unchecked\DIBRIS.Hippie.xml</DocumentationFile>
-    <Prefer32Bit>false</Prefer32Bit>
-    <CodeContractsEnableRuntimeChecking>True</CodeContractsEnableRuntimeChecking>
-    <CodeContractsRuntimeOnlyPublicSurface>False</CodeContractsRuntimeOnlyPublicSurface>
-    <CodeContractsRuntimeThrowOnFailure>True</CodeContractsRuntimeThrowOnFailure>
-    <CodeContractsRuntimeCallSiteRequires>False</CodeContractsRuntimeCallSiteRequires>
-    <CodeContractsRuntimeSkipQuantifiers>False</CodeContractsRuntimeSkipQuantifiers>
-    <CodeContractsRunCodeAnalysis>False</CodeContractsRunCodeAnalysis>
-    <CodeContractsNonNullObligations>True</CodeContractsNonNullObligations>
-    <CodeContractsBoundsObligations>True</CodeContractsBoundsObligations>
-    <CodeContractsArithmeticObligations>False</CodeContractsArithmeticObligations>
-    <CodeContractsEnumObligations>False</CodeContractsEnumObligations>
-    <CodeContractsRedundantAssumptions>False</CodeContractsRedundantAssumptions>
-    <CodeContractsMissingPublicRequiresAsWarnings>True</CodeContractsMissingPublicRequiresAsWarnings>
-    <CodeContractsInferRequires>True</CodeContractsInferRequires>
-    <CodeContractsInferEnsures>False</CodeContractsInferEnsures>
-    <CodeContractsInferObjectInvariants>False</CodeContractsInferObjectInvariants>
-    <CodeContractsSuggestAssumptions>False</CodeContractsSuggestAssumptions>
-    <CodeContractsSuggestRequires>True</CodeContractsSuggestRequires>
-    <CodeContractsSuggestObjectInvariants>False</CodeContractsSuggestObjectInvariants>
-    <CodeContractsRunInBackground>True</CodeContractsRunInBackground>
-    <CodeContractsShowSquigglies>True</CodeContractsShowSquigglies>
-    <CodeContractsUseBaseLine>False</CodeContractsUseBaseLine>
-    <CodeContractsEmitXMLDocs>False</CodeContractsEmitXMLDocs>
-    <CodeContractsCustomRewriterAssembly />
-    <CodeContractsCustomRewriterClass />
-    <CodeContractsLibPaths />
-    <CodeContractsExtraRewriteOptions />
-    <CodeContractsExtraAnalysisOptions />
-    <CodeContractsSQLServerOption />
-    <CodeContractsBaseLineFile />
-    <CodeContractsCacheAnalysisResults>True</CodeContractsCacheAnalysisResults>
-    <CodeContractsFailBuildOnWarnings>False</CodeContractsFailBuildOnWarnings>
-    <CodeContractsRuntimeCheckingLevel>None</CodeContractsRuntimeCheckingLevel>
-    <CodeContractsReferenceAssembly>DoNotBuild</CodeContractsReferenceAssembly>
-    <CodeContractsAnalysisWarningLevel>0</CodeContractsAnalysisWarningLevel>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Finsa.CodeServices.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=db894830fb4e4dbb, processorArchitecture=MSIL">
