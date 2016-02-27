@@ -12,7 +12,6 @@ Fully managed library providing five types of heap. It implements d-ary, binary,
         </description>
         <releaseNotes>
 * Updated dependencies.
-* Assemblies are now strong named.
         </releaseNotes>
         <summary>
 Fully managed library providing five types of heap.
