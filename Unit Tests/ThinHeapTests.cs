@@ -1,6 +1,6 @@
-﻿// ThinHeapTests.cs
+﻿// File name: ThinHeapTests.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,11 +21,11 @@
 
 namespace UnitTests
 {
+    using DIBRIS.Hippie;
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DIBRIS.Hippie;
-    using NUnit.Framework;
 
     public abstract class ThinHeapTests : ValPrHeapTests
     {
@@ -365,8 +365,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * ToReadOnlyForest
-		 **********************************************************************/
+         * ToReadOnlyForest
+         **********************************************************************/
 
         [Test]
         public void ToReadOnlyForest_ResultNotNull_EmptyHeap()
@@ -455,8 +455,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Reversed int comparer
-		 **********************************************************************/
+         * Reversed int comparer
+         **********************************************************************/
 
         [Test]
         public void Add_ReversedIntComparer()

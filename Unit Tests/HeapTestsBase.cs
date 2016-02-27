@@ -1,6 +1,6 @@
-﻿// HeapTestsBase.cs
+﻿// File name: HeapTestsBase.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,9 +21,9 @@
 
 namespace UnitTests
 {
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
-    using NUnit.Framework;
 
     [TestFixture]
     public abstract class HeapTestsBase

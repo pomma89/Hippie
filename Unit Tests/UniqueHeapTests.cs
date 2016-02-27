@@ -1,6 +1,6 @@
-﻿// UniqueHeapTests.cs
+﻿// File name: UniqueHeapTests.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,11 +21,11 @@
 
 namespace UnitTests
 {
+    using DIBRIS.Hippie;
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Linq;
-    using DIBRIS.Hippie;
-    using NUnit.Framework;
 
     public abstract class UniqueHeapTests : ValPrHeapTests
     {
@@ -487,8 +487,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Update
-		 **********************************************************************/
+         * Update
+         **********************************************************************/
 
         [Test]
         public void Update_ManyRandomIntValues()
@@ -704,8 +704,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Dijkstra-based tests
-		 **********************************************************************/
+         * Dijkstra-based tests
+         **********************************************************************/
 
         [Test]
         public void Dijkstra_EmptyGraph()
@@ -766,8 +766,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * ToReadOnlyForest
-		 **********************************************************************/
+         * ToReadOnlyForest
+         **********************************************************************/
 
         [Test]
         public void ToReadOnlyForest_ResultNotNull_EmptyHeap()
@@ -856,8 +856,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Fake int equality comparer
-		 **********************************************************************/
+         * Fake int equality comparer
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentException))]
@@ -914,8 +914,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Reversed int comparer
-		 **********************************************************************/
+         * Reversed int comparer
+         **********************************************************************/
 
         [Test]
         public void Add_ReversedIntComparer()

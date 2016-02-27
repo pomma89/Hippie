@@ -1,35 +1,30 @@
+// File name: HeapBenchmarks.cs
 // 
-// HeapBenchmarks.cs
-//  
-// Author:
-//       Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
+// Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
+// associated documentation files (the "Software"), to deal in the Software without restriction,
+// including without limitation the rights to use, copy, modify, merge, publish, distribute,
+// sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
 // 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
+// The above copyright notice and this permission notice shall be included in all copies or
+// substantial portions of the Software.
 // 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
+// NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+// NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 namespace Benchmarks
 {
-    using System;
-    using System.Linq;
     using Benjamin.Framework;
     using DIBRIS.Hippie;
+    using System;
+    using System.Linq;
     using UnitTests;
 
     [BenchmarkFixture]
@@ -43,7 +38,7 @@ namespace Benchmarks
         const int MinExp = 3;
         const int MaxExp = 5;
         const int Fraction = 4;
-        const int StepCount = (MaxExp - MinExp)*Fraction;
+        const int StepCount = (MaxExp - MinExp) * Fraction;
         protected readonly TVal[] MergeValues;
         protected readonly TVal[] Values;
         readonly Random rand = new Random();
@@ -52,10 +47,12 @@ namespace Benchmarks
 
         protected BaseHeapBenchmarks()
         {
-            for (var i = 0; i < (MaxExp - MinExp); ++i) {
+            for (var i = 0; i < (MaxExp - MinExp); ++i)
+            {
                 var p = (int) Math.Pow(10, i + MinExp);
-                for (var j = 0; j < Fraction; ++j) {
-                    steps[Fraction*i + j] = p + p*j*10/Fraction;
+                for (var j = 0; j < Fraction; ++j)
+                {
+                    steps[Fraction * i + j] = p + p * j * 10 / Fraction;
                 }
             }
 
@@ -78,8 +75,8 @@ namespace Benchmarks
         }
 
         /**********************************************************************
-		 * Min
-		 **********************************************************************/
+         * Min
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         public void Min_OrderedValues(IBenchmarkContext ctx)
@@ -108,8 +105,8 @@ namespace Benchmarks
         }
 
         /**********************************************************************
-		 * Add
-		 **********************************************************************/
+         * Add
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         [Comparison(AddComparison, Visibility.Fixture)]
@@ -141,8 +138,8 @@ namespace Benchmarks
         }
 
         /**********************************************************************
-		 * UpdatePriorityOf
-		 **********************************************************************/
+         * UpdatePriorityOf
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         [Comparison(ChangePriorityComparison)]
@@ -152,15 +149,16 @@ namespace Benchmarks
             AddRandomValues(valueCount);
             var values = Heap.Select(p => p.Value).ToArray();
             ctx.StartMonitors();
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 Heap.UpdatePriorityOf(values[i], rand.Next());
             }
             ctx.StopMonitors();
         }
 
         /**********************************************************************
-		 * Merge
-		 **********************************************************************/
+         * Merge
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         [Comparison(MergeComparison)]
@@ -169,7 +167,8 @@ namespace Benchmarks
             var valueCount = GetValueCount(ctx);
             AddRandomValues(valueCount);
             var otherHeap = GetHeap();
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 otherHeap.Add(MergeValues[i], rand.Next());
             }
             ctx.StartMonitors();
@@ -178,8 +177,8 @@ namespace Benchmarks
         }
 
         /**********************************************************************
-		 * Remove
-		 **********************************************************************/
+         * Remove
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         [Comparison(RemoveComparison, Visibility.Fixture)]
@@ -207,15 +206,16 @@ namespace Benchmarks
             var valueCount = GetValueCount(ctx);
             addMethod(valueCount);
             ctx.StartMonitors();
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 Heap.Remove(Values[i]);
             }
             ctx.StopMonitors();
         }
 
         /**********************************************************************
-		 * RemoveMin
-		 **********************************************************************/
+         * RemoveMin
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         [Comparison(RemoveMinComparison, Visibility.Fixture)]
@@ -242,15 +242,16 @@ namespace Benchmarks
         {
             addMethod(GetValueCount(ctx));
             ctx.StartMonitors();
-            while (Heap.Count != 0) {
+            while (Heap.Count != 0)
+            {
                 Heap.RemoveMin();
             }
             ctx.StopMonitors();
         }
 
         /**********************************************************************
-		 * Dijkstra
-		 **********************************************************************/
+         * Dijkstra
+         **********************************************************************/
 
         [Benchmark(500, 3500, 500)]
         public void Dijkstra_DenseGraph(IBenchmarkContext ctx)
@@ -267,8 +268,8 @@ namespace Benchmarks
         protected abstract void Dijkstra_Benchmark(IBenchmarkContext ctx, double edgeProb);
 
         /**********************************************************************
-		 * HeapSort
-		 **********************************************************************/
+         * HeapSort
+         **********************************************************************/
 
         [Benchmark(StepCount)]
         public void HeapSort_OrderedValues(IBenchmarkContext ctx)
@@ -287,19 +288,20 @@ namespace Benchmarks
             var valueCount = GetValueCount(ctx);
             ctx.StartMonitors();
             addMethod(valueCount);
-            while (Heap.Count != 0) {
+            while (Heap.Count != 0)
+            {
                 Heap.RemoveMin();
             }
             ctx.StopMonitors();
         }
 
         /**********************************************************************
-		 * Protected methods
-		 **********************************************************************/
+         * Protected methods
+         **********************************************************************/
 
         /**********************************************************************
-		 * Private methods
-		 **********************************************************************/
+         * Private methods
+         **********************************************************************/
 
         int GetValueCount(IBenchmarkContext ctx)
         {
@@ -310,21 +312,24 @@ namespace Benchmarks
 
         void AddOrderedValues(int valueCount)
         {
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 Heap.Add(Values[i], i);
             }
         }
 
         void AddReverseOrderedValues(int valueCount)
         {
-            for (var i = valueCount - 1; i >= 0; --i) {
+            for (var i = valueCount - 1; i >= 0; --i)
+            {
                 Heap.Add(Values[i], i);
             }
         }
 
         void AddRandomValues(int valueCount)
         {
-            for (var i = 0; i < valueCount; ++i) {
+            for (var i = 0; i < valueCount; ++i)
+            {
                 Heap.Add(Values[i], rand.Next());
             }
         }
@@ -337,7 +342,8 @@ namespace Benchmarks
         protected RawHeapBenchmarks()
         {
             var length = Values.Length;
-            for (var i = 0; i < length; ++i) {
+            for (var i = 0; i < length; ++i)
+            {
                 Values[i] = i;
                 MergeValues[i] = i + length;
             }
@@ -398,7 +404,8 @@ namespace Benchmarks
         protected UniqueHeapBenchmarks()
         {
             var length = Values.Length;
-            for (var i = 0; i < length; ++i) {
+            for (var i = 0; i < length; ++i)
+            {
                 Values[i] = i;
                 MergeValues[i] = i + length;
             }

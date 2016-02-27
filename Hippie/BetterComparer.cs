@@ -19,14 +19,14 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+using PommaLabs.Thrower.Reflection;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+
 namespace DIBRIS.Hippie
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using Finsa.CodeServices.Common.Portability;
-
     /// <summary>
     ///   A class offering a better default comparer for given type parameter
     ///   <typeparamref name="T"/>. <br/> We need a particular version of <see cref="Comparer{T}"/>,
@@ -50,7 +50,7 @@ namespace DIBRIS.Hippie
                 return;
             }
             var baseCmp = typeof(BetterComparer<>).MakeGenericType(PortableTypeInfo.GetBaseType(type));
-            var defCmp = PortableTypeInfo.GetProperties(baseCmp).First();
+            var defCmp = PortableTypeInfo.GetPublicProperties(baseCmp).First();
             DefaultCmp = (IComparer<T>) defCmp.GetValue(null, null);
         }
 

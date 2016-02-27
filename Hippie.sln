@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hippie", "Hippie\Hippie.csproj", "{12ED0C29-A453-4EBB-B798-BFCD1F182469}"
 EndProject
@@ -12,8 +12,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F2CC6A3-09C9-4E34-9BAA-FBA0AC5B657B}"
 	ProjectSection(SolutionItems) = preProject
 		appveyor.yml = appveyor.yml
-		Hippie.sln.DotSettings = Hippie.sln.DotSettings
 		LICENSE.md = LICENSE.md
+		pomma89.snk = pomma89.snk
 		README.md = README.md
 	EndProjectSection
 EndProject

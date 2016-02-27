@@ -1,6 +1,6 @@
-﻿// AssemblyInfo.cs
+﻿// File name: AssemblyInfo.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
