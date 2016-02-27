@@ -1,6 +1,6 @@
-﻿// MultiHeapTests.cs
+﻿// File name: MultiHeapTests.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,12 +21,12 @@
 
 namespace UnitTests
 {
+    using DIBRIS.Hippie;
+    using NUnit.Framework;
     using System;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Linq;
-    using DIBRIS.Hippie;
-    using NUnit.Framework;
 
     public abstract class MultiHeapTests : HeapTestsBase
     {
@@ -57,8 +57,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Add
-		 **********************************************************************/
+         * Add
+         **********************************************************************/
 
         [Test]
         public void Add_FewOrderedIntItems()
@@ -117,8 +117,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Clear
-		 **********************************************************************/
+         * Clear
+         **********************************************************************/
 
         [Test]
         public void Clear_FewOrderedIntItems()
@@ -180,8 +180,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Contains
-		 **********************************************************************/
+         * Contains
+         **********************************************************************/
 
         [Test]
         public void Contains_FewOrderedIntItems()
@@ -241,8 +241,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Remove
-		 **********************************************************************/
+         * Remove
+         **********************************************************************/
 
         [Test]
         public void Remove_FewOrderedIntItems()
@@ -317,8 +317,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Merge
-		 **********************************************************************/
+         * Merge
+         **********************************************************************/
 
         [Test]
         public void Merge_DifferentHeapType_ManyOrderedIntItems()
@@ -466,8 +466,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * HeapSort
-		 **********************************************************************/
+         * HeapSort
+         **********************************************************************/
 
         [Test]
         public void HeapSort_FewOrderedIntItems()
@@ -530,8 +530,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * ToReadOnlyForest
-		 **********************************************************************/
+         * ToReadOnlyForest
+         **********************************************************************/
 
         [Test]
         public void ToReadOnlyForest_ResultNotNull_EmptyHeap()
@@ -639,8 +639,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Fake int equality comparer
-		 **********************************************************************/
+         * Fake int equality comparer
+         **********************************************************************/
 
         [Test]
         public void Add_FakeIntEqualityComparer()
@@ -682,8 +682,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Reversed int comparer
-		 **********************************************************************/
+         * Reversed int comparer
+         **********************************************************************/
 
         [Test]
         public void Add_ReversedIntComparer()
@@ -698,8 +698,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Private methods
-		 **********************************************************************/
+         * Private methods
+         **********************************************************************/
 
         private static void AssertSameContents<T>(IHeap<T> refHeap, IHeap<T> heap)
             where T : IComparable<T>

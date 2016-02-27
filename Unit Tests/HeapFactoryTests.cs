@@ -1,6 +1,6 @@
-﻿// HeapFactoryTests.cs
+﻿// File name: HeapFactoryTests.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,17 +21,17 @@
 
 namespace UnitTests
 {
-    using System;
-    using System.Collections.Generic;
     using DIBRIS.Hippie;
     using NUnit.Framework;
+    using System;
+    using System.Collections.Generic;
 
     [TestFixture]
     public class HeapFactoryTests
     {
         /**********************************************************************
-		 * Array heap
-		 **********************************************************************/
+         * Array heap
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -69,8 +69,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Binary heap
-		 **********************************************************************/
+         * Binary heap
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -112,8 +112,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Binomial heap
-		 **********************************************************************/
+         * Binomial heap
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -155,8 +155,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Fibonacci heap
-		 **********************************************************************/
+         * Fibonacci heap
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -198,8 +198,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Pairing heap
-		 **********************************************************************/
+         * Pairing heap
+         **********************************************************************/
 
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
@@ -305,8 +305,8 @@ namespace UnitTests
         }
 
         /**********************************************************************
-		 * Private methods
-		 **********************************************************************/
+         * Private methods
+         **********************************************************************/
 
         private static void AssertHeapCorrectness<TVal, TPr>(IRawHeap<TVal, TPr> heap, IComparer<TPr> cmp)
         {

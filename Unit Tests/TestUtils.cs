@@ -1,6 +1,6 @@
-// TestUtils.cs
+// File name: TestUtils.cs
 // 
-// Author: Alessio Parma <alessio.parma@gmail.com>
+// Author(s): Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2012-2016 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -21,9 +21,9 @@
 
 namespace UnitTests
 {
+    using DIBRIS.Hippie;
     using System;
     using System.Collections.Generic;
-    using DIBRIS.Hippie;
 
     public sealed class RandomGraph
     {
