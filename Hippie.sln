@@ -75,6 +75,9 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{07CCD06B-34D8-4F83-ADC4-03491DD8746D} = {7F2CC6A3-09C9-4E34-9BAA-FBA0AC5B657B}
+	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Hippie.Examples\Hippie.Examples.csproj
 		Policies = $0
