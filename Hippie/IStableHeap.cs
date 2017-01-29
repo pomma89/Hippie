@@ -52,7 +52,7 @@ namespace DIBRIS.Hippie
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="handle"/> or <paramref name="value"/> are null.
         /// </exception>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         TPr this[IHeapHandle<TVal, IVersionedPriority<TPr>> handle] { set; }
 
         /// <summary>
@@ -80,14 +80,14 @@ namespace DIBRIS.Hippie
         /// </summary>
         /// <param name="handle">The handle to be checked.</param>
         /// <returns>True if the element is contained, false otherwise.</returns>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         bool Contains(IHeapHandle<TVal, IVersionedPriority<TPr>> handle);
 
         /// <summary>
         ///   Returns an enumerator that iterates through the heap.
         /// </summary>
         /// <returns>An enumerator that iterates through the heap.</returns>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         new IEnumerator<IHeapHandle<TVal, IVersionedPriority<TPr>>> GetEnumerator();
 
         /// <summary>

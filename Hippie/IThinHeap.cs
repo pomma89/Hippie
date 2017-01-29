@@ -76,20 +76,20 @@ namespace DIBRIS.Hippie
         /// <summary>
         ///   The comparer used to decide the order of handles contained in the heap.
         /// </summary>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         IComparer<TPr> Comparer { get; }
 
         /// <summary>
         ///   The comparer used to decide the equality of values contained in the heap.
         /// </summary>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         IEqualityComparer<TVal> EqualityComparer { get; }
 
         /// <summary>
         ///   The minimum handle of the heap.
         /// </summary>
         /// <exception cref="InvalidOperationException">Heap is empty.</exception>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         IHeapHandle<TVal, TPr> Min { get; }
 
         /// <summary>
@@ -136,7 +136,7 @@ namespace DIBRIS.Hippie
         ///   of the underlying data structure by creating something like a graphical tester.
         /// </remarks>
         /// <returns>A snapshot of the current underlying tree structure of the heap.</returns>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         IEnumerable<IReadOnlyTree<TVal, TPr>> ToReadOnlyForest();
     }
 
@@ -155,13 +155,13 @@ namespace DIBRIS.Hippie
         ///   The minimum handle of the heap.
         /// </summary>
         /// <exception cref="InvalidOperationException">Heap is empty.</exception>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         new IHeapHandle<TVal, IVersionedPriority<TPr>> Min { get; }
 
         /// <summary>
         ///   The next version that it will be automatically assigned to handles.
         /// </summary>
-        [Pure]
+        ////[Pure] <-- DELETE <-- DELETE
         long NextVersion { get; }
 
         /// <summary>
