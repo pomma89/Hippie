@@ -176,9 +176,6 @@
     <Compile Include="..\Hippie\Core\LinkedLists\DoublyLinkedList.cs">
       <Link>Core\LinkedLists\DoublyLinkedList.cs</Link>
     </Compile>
-    <Compile Include="..\Hippie\Core\LinkedLists\ErrorMessages.cs">
-      <Link>Core\LinkedLists\ErrorMessages.cs</Link>
-    </Compile>
     <Compile Include="..\Hippie\Core\LinkedLists\HashLinkedList.cs">
       <Link>Core\LinkedLists\HashLinkedList.cs</Link>
     </Compile>

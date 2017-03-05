@@ -23,7 +23,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 
-namespace PommaLabs.CodeServices.Common.Collections
+namespace DIBRIS.Hippie.Core.LinkedLists
 {
     /// <summary>
     ///   Represents a linked list which has a very low memory footprint, but it also exposes very

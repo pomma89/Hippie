@@ -22,7 +22,7 @@
 namespace DIBRIS.Hippie
 {
     using Core;
-    using PommaLabs.CodeServices.Common.Collections;
+    using DIBRIS.Hippie.Core.LinkedLists;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;

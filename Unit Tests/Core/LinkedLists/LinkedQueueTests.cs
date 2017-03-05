@@ -19,10 +19,10 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using PommaLabs.CodeServices.Common.Collections;
+using DIBRIS.Hippie.Core.LinkedLists;
 using NUnit.Framework;
 
-namespace PommaLabs.CodeServices.UnitTests.Common.Collections
+namespace DIBRIS.Hippie.UnitTests.Core.LinkedLists
 {
     [TestFixture]
 sealed class LinkedQueueTests

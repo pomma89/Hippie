@@ -21,10 +21,10 @@
 
 using System;
 using System.Collections.Generic;
-using PommaLabs.CodeServices.Common.Collections;
+using DIBRIS.Hippie.Core.LinkedLists;
 using NUnit.Framework;
 
-namespace PommaLabs.CodeServices.UnitTests.Common.Collections
+namespace DIBRIS.Hippie.UnitTests.Core.LinkedLists
 {
     abstract class ThinLinkedListTests<TList> where TList : class, IThinLinkedList<int>
     {

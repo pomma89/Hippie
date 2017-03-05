@@ -22,7 +22,7 @@
 using PommaLabs.Thrower.Goodies;
 using System.Collections.Generic;
 
-namespace PommaLabs.CodeServices.Common.Collections.Core
+namespace DIBRIS.Hippie.Core.LinkedLists.Core
 {
     public abstract class NodeBase<TN, TI> : FormattableObject where TN : NodeBase<TN, TI>
     {

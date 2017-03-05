@@ -156,7 +156,6 @@
     <Compile Include="Contracts\UniqueHeapContract.cs" />
     <Compile Include="Core\ExtensionMethods.cs" />
     <Compile Include="Core\LinkedLists\DoublyLinkedList.cs" />
-    <Compile Include="Core\LinkedLists\ErrorMessages.cs" />
     <Compile Include="Core\LinkedLists\HashLinkedList.cs" />
     <Compile Include="Core\LinkedLists\LinkedListsBases.cs" />
     <Compile Include="Core\LinkedLists\LinkedListsInterfaces.cs" />

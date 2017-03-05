@@ -20,11 +20,11 @@
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using NUnit.Framework;
-using PommaLabs.CodeServices.Common.Collections;
+using DIBRIS.Hippie.Core.LinkedLists;
 using System;
 using System.Collections.Generic;
 
-namespace PommaLabs.CodeServices.UnitTests.Common.Collections
+namespace DIBRIS.Hippie.UnitTests.Core.LinkedLists
 {
     internal abstract class SinglyLinkedListTests<TList> : ThinLinkedListTests<TList> where TList : class, ILinkedList<int>
     {

@@ -1,35 +1,35 @@
 <?xml version="1.0"?>
 
 <package>
-    <metadata>
-        <id>Hippie</id>
-        <version>2.10.1</version>
-        <title>Hippie - Heaps and priority queues</title>
-        <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
-        <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
-        <description>
-Fully managed library providing five types of heap. It implements d-ary, binary, binomial, Fibonacci and pairing heaps, in order to let the user choose the best heap to fit her needs. Each heap has its own advantages and disadvantages: please see the documentation or Wikipedia to better understand how those data structures work and how they behave in each operation.
-        </description>
-        <releaseNotes>
-* Updated dependencies.
-        </releaseNotes>
-        <summary>
-Fully managed library providing five types of heap.
-        </summary>
-        <language>en-US</language>
-        <projectUrl>https://github.com/pomma89/Hippie</projectUrl>
-        <iconUrl>https://googledrive.com/host/0B8v0ikF4z2BiR29YQmxfSlE1Sms/Progetti/Hippie/logo-128.png</iconUrl>
-        <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
-        <copyright>Copyright (c) 2012-2016 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>
-        <dependencies>
-            <dependency id="PommaLabs.CodeServices.Common" version="4.1.1" />
-        </dependencies>
-        <references></references>
-        <tags>heap binary binomial pairing fibonacci priority queue ternary quaternary stable</tags>
-    </metadata>
-    <files>
-        <file src="lib\" target="lib" />
-        <file src="LICENSE.md" target="LICENSE.md" />
-    </files>
+  <metadata>
+    <id>Hippie</id>
+    <version>2.10.1</version>
+    <title>Hippie - Heaps and priority queues</title>
+    <authors>Alessio Parma &lt;alessio.parma@gmail.com&gt;</authors>
+    <owners>Alessio Parma &lt;alessio.parma@gmail.com&gt;</owners>
+    <description>
+      Fully managed library providing five types of heap. It implements d-ary, binary, binomial, Fibonacci and pairing heaps, in order to let the user choose the best heap to fit her needs. Each heap has its own advantages and disadvantages: please see the documentation or Wikipedia to better understand how those data structures work and how they behave in each operation.
+    </description>
+    <releaseNotes>
+      * Updated dependencies.
+    </releaseNotes>
+    <summary>
+      Fully managed library providing five types of heap.
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/pomma89/Hippie</projectUrl>
+    <iconUrl>https://googledrive.com/host/0B8v0ikF4z2BiR29YQmxfSlE1Sms/Progetti/Hippie/logo-128.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>
+    <copyright>Copyright (c) 2012-2016 Alessio Parma &lt;alessio.parma@gmail.com&gt;</copyright>
+    <dependencies>
+      <dependency id="Thrower" version="4.0.15" />
+    </dependencies>
+    <references></references>
+    <tags>heap binary binomial pairing fibonacci priority queue ternary quaternary stable</tags>
+  </metadata>
+  <files>
+    <file src="lib\" target="lib" />
+    <file src="LICENSE.md" target="LICENSE.md" />
+  </files>
 </package>

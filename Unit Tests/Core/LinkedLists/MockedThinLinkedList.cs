@@ -22,10 +22,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using PommaLabs.CodeServices.Common.Collections;
+using DIBRIS.Hippie.Core.LinkedLists;
 using NUnit.Framework;
 
-namespace PommaLabs.CodeServices.UnitTests.Common.Collections
+namespace DIBRIS.Hippie.UnitTests.Core.LinkedLists
 {
     class MockedThinLinkedList<TList, TItem> : IThinLinkedList<TItem> where TList : class, IThinLinkedList<TItem>
     {

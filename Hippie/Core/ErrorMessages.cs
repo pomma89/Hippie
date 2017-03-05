@@ -36,6 +36,13 @@ namespace DIBRIS.Hippie.Core
         public const string NullPriority = "Priority cannot be null, in order to avoid issues with comparers.";
         public const string NullValue = "Value cannot be null, in order to avoid issues with equality comparers.";
         public const string ValueContained = "Heap already contains given value.";
+
         public const string WrongChildCount = "Child count must be greater than or equal to two.";
+        public const string ContainedItem = "TODO";
+        public const string EmptyList = "List is empty";
+        public const string EmptyQueue = "Queue is empty";
+        public const string EmptyStack = "Stack is empty";
+        public const string NotContainedItem = "TODO";
+        public const string NullList = "TODO";
     }
 }

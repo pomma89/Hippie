@@ -20,10 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System.Collections.Generic;
-using PommaLabs.CodeServices.Common.Collections;
+using DIBRIS.Hippie.Core.LinkedLists;
 using NUnit.Framework;
 
-namespace PommaLabs.CodeServices.UnitTests.Common.Collections
+namespace DIBRIS.Hippie.UnitTests.Core.LinkedLists
 {
     class MockedDoublyLinkedList<TList, TItem> : MockedLinkedList<TList, TItem>, IDoublyLinkedList<TItem>
         where TList : class, IDoublyLinkedList<TItem>

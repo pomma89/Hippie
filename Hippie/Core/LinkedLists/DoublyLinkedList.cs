@@ -19,13 +19,12 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 // OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using PommaLabs.CodeServices.Common.Collections.Core;
-using PommaLabs.CodeServices.Common.Core;
+using DIBRIS.Hippie.Core.LinkedLists.Core;
 using PommaLabs.Thrower;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace PommaLabs.CodeServices.Common.Collections
+namespace DIBRIS.Hippie.Core.LinkedLists
 {
     /// <typeparam name="T">The type of the items the list will contain.</typeparam>
     public sealed class DoublyLinkedList<T> : ListBase<DoublyNode<T>, T>, IDoublyLinkedList<T>
