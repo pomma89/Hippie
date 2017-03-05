@@ -15,7 +15,8 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <NuGetPackageImportStamp>fa952870</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -129,48 +130,20 @@
     <AssemblyOriginatorKeyFile>..\pomma89.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Finsa.CodeServices.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=db894830fb4e4dbb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Finsa.CodeServices.Common.4.1.1\lib\net40\Finsa.CodeServices.Common.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions, Version=1.0.12.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Threading.Tasks.Extensions.Desktop, Version=1.0.168.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.Async.1.0.168\lib\net40\Microsoft.Threading.Tasks.Extensions.Desktop.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="PommaLabs.Thrower, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
-      <HintPath>..\packages\Thrower.2.2.1\lib\net40\PommaLabs.Thrower.dll</HintPath>
+    <Reference Include="PommaLabs.Thrower, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
+      <HintPath>..\packages\Thrower.4.0.15\lib\net40\PommaLabs.Thrower.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
-    <Reference Include="System.IO">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.IO.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net" />
-    <Reference Include="System.Runtime">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>..\packages\Microsoft.Bcl.1.1.10\lib\net40\System.Threading.Tasks.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="Troschuetz.Random, Version=4.0.3.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
-      <HintPath>..\packages\Troschuetz.Random.4.0.3\lib\net40\Troschuetz.Random.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\Hippie\ArrayHeap.cs">
@@ -199,6 +172,36 @@
     </Compile>
     <Compile Include="..\Hippie\Core\ExtensionMethods.cs">
       <Link>Core\ExtensionMethods.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\DoublyLinkedList.cs">
+      <Link>Core\LinkedLists\DoublyLinkedList.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\ErrorMessages.cs">
+      <Link>Core\LinkedLists\ErrorMessages.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\HashLinkedList.cs">
+      <Link>Core\LinkedLists\HashLinkedList.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\LinkedListsBases.cs">
+      <Link>Core\LinkedLists\LinkedListsBases.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\LinkedListsInterfaces.cs">
+      <Link>Core\LinkedLists\LinkedListsInterfaces.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\LinkedListsNodes.cs">
+      <Link>Core\LinkedLists\LinkedListsNodes.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\LinkedQueue.cs">
+      <Link>Core\LinkedLists\LinkedQueue.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\LinkedStack.cs">
+      <Link>Core\LinkedLists\LinkedStack.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\SinglyLinkedList.cs">
+      <Link>Core\LinkedLists\SinglyLinkedList.cs</Link>
+    </Compile>
+    <Compile Include="..\Hippie\Core\LinkedLists\ThinLinkedList.cs">
+      <Link>Core\LinkedLists\ThinLinkedList.cs</Link>
     </Compile>
     <Compile Include="..\Hippie\Core\RawHeap.cs">
       <Link>Core\RawHeap.cs</Link>
@@ -254,6 +257,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
@@ -261,7 +265,6 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
   </Target>
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)NuGet Packager/lib/net40-client" mkdir "$(SolutionDir)NuGet Packager/lib/net40-client"
@@ -269,7 +272,6 @@ copy "$(TargetDir)DIBRIS.Hippie.dll" "$(SolutionDir)NuGet Packager/lib/net40-cli
 copy "$(TargetDir)DIBRIS.Hippie.pdb" "$(SolutionDir)NuGet Packager/lib/net40-client"
 copy "$(TargetDir)DIBRIS.Hippie.xml" "$(SolutionDir)NuGet Packager/lib/net40-client"</PostBuildEvent>
   </PropertyGroup>
-  <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

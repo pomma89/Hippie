@@ -1,6 +1,6 @@
-﻿// File name: LinkedListsNodes.cs
+﻿// LinkedStackTests.cs
 // 
-// Author(s): Alessio Parma <alessio.parma@gmail.com>
+// Author: Alessio Parma <alessio.parma@gmail.com>
 // 
 // Copyright (c) 2013-2014 Alessio Parma <alessio.parma@gmail.com>
 // 
@@ -19,38 +19,48 @@
 // DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using System.Collections.Generic;
+using PommaLabs.CodeServices.Common.Collections;
+using NUnit.Framework;
 
-namespace PommaLabs.CodeServices.Common.Collections.Core
+namespace PommaLabs.CodeServices.UnitTests.Common.Collections
 {
-    public abstract class NodeBase<TN, TI> where TN : NodeBase<TN, TI>
+    [TestFixture]
+sealed class LinkedStackTests
     {
-        public readonly TI Item;
-        public TN Next;
-
-        internal NodeBase(TI item, TN next)
+        [SetUp]
+        public void SetUp()
         {
-            Item = item;
-            Next = next;
+            _stack = new LinkedStack<int>();
         }
-    }
 
-    public sealed class SinglyNode<T> : NodeBase<SinglyNode<T>, T>
-    {
-        internal SinglyNode(T item, SinglyNode<T> next)
-            : base(item, next)
+        [TearDown]
+        public void TearDown()
         {
+            _stack = null;
         }
-    }
 
-    public sealed class DoublyNode<T> : NodeBase<DoublyNode<T>, T>
-    {
-        public DoublyNode<T> Prev;
+        const int SmallCount = 10;
+        const int MediumCount = 100;
+        const int BigCount = 1000;
 
-        internal DoublyNode(T item, DoublyNode<T> next, DoublyNode<T> prev)
-            : base(item, next)
+        ILinkedStack<int> _stack;
+
+        [TestCase(SmallCount)]
+        [TestCase(MediumCount)]
+        [TestCase(BigCount)]
+        public void SimpleTest(int itemCount)
         {
-            Prev = prev;
+            for (var i = 0; i < itemCount; ++i)
+            {
+                _stack.Push(i);
+            }
+            Assert.AreEqual(itemCount, _stack.Count);
+            for (var i = itemCount - 1; i >= 0; --i)
+            {
+                Assert.AreEqual(i, _stack.Top());
+                Assert.AreEqual(i, _stack.Pop());
+                Assert.AreEqual(i, _stack.Count);
+            }
         }
     }
 }

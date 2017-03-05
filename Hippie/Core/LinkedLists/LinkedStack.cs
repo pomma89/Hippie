@@ -1,23 +1,23 @@
-﻿// File name: LinkedQueue.cs
-// 
+﻿// File name: LinkedStack.cs
+//
 // Author(s): Alessio Parma <alessio.parma@gmail.com>
-// 
+//
 // Copyright (c) 2013-2014 Alessio Parma <alessio.parma@gmail.com>
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 // associated documentation files (the "Software"), to deal in the Software without restriction,
 // including without limitation the rights to use, copy, modify, merge, publish, distribute,
 // sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all copies or
 // substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
+// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using PommaLabs.CodeServices.Common.Collections.Core;
 using PommaLabs.CodeServices.Common.Core;
@@ -28,23 +28,22 @@ using System.Diagnostics;
 
 namespace PommaLabs.CodeServices.Common.Collections
 {
-    /// <typeparam name="T">The type of the items the queue will contain.</typeparam>
-    public sealed class LinkedQueue<T> : ILinkedQueue<T>
+    /// <typeparam name="T">The type of the items the stack will contain.</typeparam>
+    public sealed class LinkedStack<T> : ILinkedStack<T>
     {
         #region Fields
 
         private SinglyNode<T> _firstNode;
-        private SinglyNode<T> _lastNode;
 
         #endregion Fields
 
         #region Construction
 
         /// <summary>
-        ///   Returns a queue implemented using an <see cref="ILinkedList{TItem}"/>.
+        ///   Returns a stack implemented using an <see cref="IThinLinkedList{TItem}"/>.
         /// </summary>
-        /// <returns>A queue implemented using an <see cref="ILinkedList{TItem}"/>.</returns>
-        public LinkedQueue()
+        /// <returns>A stack implemented using an <see cref="IThinLinkedList{TItem}"/>.</returns>
+        public LinkedStack()
         {
             // Postconditions
             Debug.Assert(Count == 0);
@@ -69,46 +68,35 @@ namespace PommaLabs.CodeServices.Common.Collections
 
         #endregion IEnumerable Members
 
-        #region ILinkedQueue Members
+        #region ILinkedStack Members
 
         public int Count { get; private set; }
 
-        public T Dequeue()
+        public void Push(T item)
+        {
+            _firstNode = new SinglyNode<T>(item, _firstNode);
+            Count++;
+        }
+
+        public T Pop()
         {
             // Preconditions
-            Raise.InvalidOperationException.If(Count == 0, ErrorMessages.EmptyQueue);
+            Raise.InvalidOperationException.If(Count == 0, ErrorMessages.EmptyStack);
 
             var first = _firstNode.Item;
             _firstNode = _firstNode.Next;
-            if (--Count == 0)
-            {
-                _lastNode = null;
-            }
+            Count--;
             return first;
         }
 
-        public void Enqueue(T item)
-        {
-            var node = new SinglyNode<T>(item, null);
-            if (Count++ == 0)
-            {
-                _firstNode = node;
-            }
-            else
-            {
-                _lastNode.Next = node;
-            }
-            _lastNode = node;
-        }
-
-        public T Peek()
+        public T Top()
         {
             // Preconditions
-            Raise.InvalidOperationException.If(Count == 0, ErrorMessages.EmptyQueue);
+            Raise.InvalidOperationException.If(Count == 0, ErrorMessages.EmptyStack);
 
             return _firstNode.Item;
         }
 
-        #endregion ILinkedQueue Members
+        #endregion ILinkedStack Members
     }
 }

@@ -1,27 +1,27 @@
 ﻿// File name: LinkedListsInterfaces.cs
-// 
+//
 // Author(s): Alessio Parma <alessio.parma@gmail.com>
-// 
+//
 // Copyright (c) 2013-2014 Alessio Parma <alessio.parma@gmail.com>
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
 // associated documentation files (the "Software"), to deal in the Software without restriction,
 // including without limitation the rights to use, copy, modify, merge, publish, distribute,
 // sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in all copies or
 // substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT
 // NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
 // NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+// DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
+// OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 using System;
 using System.Collections.Generic;
-//using System.Diagnostics.Contracts;
+using System.Diagnostics.Contracts;
 
 namespace PommaLabs.CodeServices.Common.Collections
 {
@@ -35,14 +35,14 @@ namespace PommaLabs.CodeServices.Common.Collections
         /// <summary>
         ///   The equality comparer used to determine whether two items are equal.
         /// </summary>
-        //[Pure] <-- DELETE
+        [Pure]
         IEqualityComparer<T> EqualityComparer { get; }
 
         /// <summary>
         ///   The first item of the list.
         /// </summary>
         /// <exception cref="InvalidOperationException">List is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T First { get; }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace PommaLabs.CodeServices.Common.Collections
     }
 
     /// <summary>
-    ///   </summary>
+    /// </summary>
     /// <typeparam name="T">The type of the items of the list.</typeparam>
     public interface ILinkedList<T> : IThinLinkedList<T>
     {
@@ -67,7 +67,7 @@ namespace PommaLabs.CodeServices.Common.Collections
         ///   The last item of the list.
         /// </summary>
         /// <exception cref="InvalidOperationException">List is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T Last { get; }
 
         /// <summary>
@@ -90,7 +90,7 @@ namespace PommaLabs.CodeServices.Common.Collections
     }
 
     /// <summary>
-    ///   </summary>
+    /// </summary>
     /// <typeparam name="T">The type of the items of the list.</typeparam>
     public interface IDoublyLinkedList<T> : ILinkedList<T>
     {
@@ -110,7 +110,7 @@ namespace PommaLabs.CodeServices.Common.Collections
         ///   Returns an enumerator to iterate over this list in reversed order.
         /// </summary>
         /// <returns>An enumerator to iterate over this list in reversed order.</returns>
-        //[Pure] <-- DELETE
+        [Pure]
         IEnumerator<T> GetReversedEnumerator();
 
         /// <summary>
@@ -127,28 +127,28 @@ namespace PommaLabs.CodeServices.Common.Collections
     }
 
     /// <summary>
-    ///   </summary>
+    /// </summary>
     /// <typeparam name="T">The type of the items of the list.</typeparam>
     public interface IHashLinkedList<T> : ICollection<T>
     {
         /// <summary>
         ///   The equality comparer used to determine whether two items are equal.
         /// </summary>
-        //[Pure] <-- DELETE
+        [Pure]
         IEqualityComparer<T> EqualityComparer { get; }
 
         /// <summary>
         ///   The first item of the list.
         /// </summary>
         /// <exception cref="InvalidOperationException">List is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T First { get; }
 
         /// <summary>
         ///   The last item of the list.
         /// </summary>
         /// <exception cref="InvalidOperationException">List is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T Last { get; }
 
         /// <summary>
@@ -195,7 +195,7 @@ namespace PommaLabs.CodeServices.Common.Collections
         ///   Returns an enumerator to iterate over this list in reversed order.
         /// </summary>
         /// <returns>An enumerator to iterate over this list in reversed order.</returns>
-        //[Pure] <-- DELETE
+        [Pure]
         IEnumerator<T> GetReversedEnumerator();
 
         /// <summary>
@@ -242,14 +242,14 @@ namespace PommaLabs.CodeServices.Common.Collections
     }
 
     /// <summary>
-    ///   </summary>
+    /// </summary>
     /// <typeparam name="T">The type of the items of the queue.</typeparam>
     public interface ILinkedQueue<T> : IEnumerable<T>
     {
         /// <summary>
         ///   The number of items contained in the queue.
         /// </summary>
-        //[Pure] <-- DELETE
+        [Pure]
         int Count { get; }
 
         /// <summary>
@@ -268,19 +268,19 @@ namespace PommaLabs.CodeServices.Common.Collections
         ///   The first item of the queue.
         /// </summary>
         /// <exception cref="InvalidOperationException">Queue is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T Peek();
     }
 
     /// <summary>
-    ///   </summary>
+    /// </summary>
     /// <typeparam name="T">The type of the items of the stack.</typeparam>
     public interface ILinkedStack<T> : IEnumerable<T>
     {
         /// <summary>
         ///   The number of items contained in the stack.
         /// </summary>
-        //[Pure] <-- DELETE
+        [Pure]
         int Count { get; }
 
         /// <summary>
@@ -299,7 +299,7 @@ namespace PommaLabs.CodeServices.Common.Collections
         ///   The first item of the stack.
         /// </summary>
         /// <exception cref="InvalidOperationException">Stack is empty.</exception>
-        //[Pure] <-- DELETE
+        [Pure]
         T Top();
     }
 }

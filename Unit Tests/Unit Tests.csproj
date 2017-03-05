@@ -48,6 +48,15 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\LinkedLists\DoublyLinkedListTests.cs" />
+    <Compile Include="Core\LinkedLists\HashLinkedListTests.cs" />
+    <Compile Include="Core\LinkedLists\LinkedQueueTests.cs" />
+    <Compile Include="Core\LinkedLists\LinkedStackTests.cs" />
+    <Compile Include="Core\LinkedLists\MockedDoublyLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\MockedLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\MockedThinLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\SinglyLinkedListTests.cs" />
+    <Compile Include="Core\LinkedLists\ThinLinkedListTests.cs" />
     <Compile Include="ThinHeapTests.cs" />
     <Compile Include="HeapTestsBase.cs" />
     <Compile Include="HeapFactoryTests.cs" />

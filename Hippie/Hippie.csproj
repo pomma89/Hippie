@@ -139,19 +139,15 @@
     <AssemblyOriginatorKeyFile>..\pomma89.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Finsa.CodeServices.Common, Version=4.1.0.0, Culture=neutral, PublicKeyToken=db894830fb4e4dbb, processorArchitecture=MSIL">
-      <HintPath>..\packages\Finsa.CodeServices.Common.4.1.1\lib\portable-net45+win8+wp8+wpa81\Finsa.CodeServices.Common.dll</HintPath>
+    <Reference Include="PommaLabs.Thrower, Version=4.0.0.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
+      <HintPath>..\packages\Thrower.4.0.15\lib\portable45-net45+win8+wp8+wpa81\PommaLabs.Thrower.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="PommaLabs.Thrower, Version=2.2.0.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
-      <HintPath>..\packages\Thrower.2.2.1\lib\portable-net45+win8+wp8+wpa81\PommaLabs.Thrower.dll</HintPath>
+    <Reference Include="Portable.DataAnnotations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=6f21be3d5ccff8cd, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable-Strong.DataAnnotations.1.0.1\lib\portable-net40+netcore45+sl5+wp8+wpa81\Portable.DataAnnotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="Troschuetz.Random, Version=4.0.3.0, Culture=neutral, PublicKeyToken=2f204b7110a52060, processorArchitecture=MSIL">
-      <HintPath>..\packages\Troschuetz.Random.4.0.3\lib\portable-net45+win8+wp8+wpa81\Troschuetz.Random.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Contracts\MultiHeapContract.cs" />
@@ -159,6 +155,16 @@
     <Compile Include="Contracts\ThinHeapContract.cs" />
     <Compile Include="Contracts\UniqueHeapContract.cs" />
     <Compile Include="Core\ExtensionMethods.cs" />
+    <Compile Include="Core\LinkedLists\DoublyLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\ErrorMessages.cs" />
+    <Compile Include="Core\LinkedLists\HashLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\LinkedListsBases.cs" />
+    <Compile Include="Core\LinkedLists\LinkedListsInterfaces.cs" />
+    <Compile Include="Core\LinkedLists\LinkedListsNodes.cs" />
+    <Compile Include="Core\LinkedLists\LinkedQueue.cs" />
+    <Compile Include="Core\LinkedLists\LinkedStack.cs" />
+    <Compile Include="Core\LinkedLists\SinglyLinkedList.cs" />
+    <Compile Include="Core\LinkedLists\ThinLinkedList.cs" />
     <Compile Include="StableHeap.cs" />
     <Compile Include="ThinHeap.cs" />
     <Compile Include="IStableHeap.cs" />
@@ -195,9 +201,7 @@
     <None Include="app.config" />
     <None Include="Hippie.doxyfile" />
     <None Include="Hippie.ruleset" />
-    <None Include="packages.config">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="packages.config" />
   </ItemGroup>
   <PropertyGroup>
     <PostBuildEvent>if not exist "$(SolutionDir)NuGet Packager/lib/portable-net45+win8+wp8+wpa81" mkdir "$(SolutionDir)NuGet Packager/lib/portable-net45+win8+wp8+wpa81"
