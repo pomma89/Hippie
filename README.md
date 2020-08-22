@@ -4,4 +4,4 @@
 
 **Project repository has been moved to GitLab:**
 
-https://gitlab.com/pomma89/hippie
+https://gitlab.com/pommalabs/hippie
